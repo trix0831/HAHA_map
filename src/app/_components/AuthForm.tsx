@@ -21,7 +21,6 @@ function AuthForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: sign in logic
     signIn("credentials", {
       email,
       username,

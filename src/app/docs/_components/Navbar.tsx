@@ -78,7 +78,7 @@ async function Navbar() {
         >
           <button
             type="submit"
-            className="flex w-full items-center gap-2 px-3 py-1 text-left text-sm text-slate-500"
+            className="flex w-full items-center mb-0 gap-2 px-3 py-1 text-left text-sm text-slate-500"
           >
             <svg width="24" height="24" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" className="iconify iconify--noto" preserveAspectRatio="xMidYMid meet">
                 <path d="M116.46 3.96h-104c-4.42 0-8 3.58-8 8v104c0 4.42 3.58 8 8 8h104c4.42 0 8-3.58 8-8v-104c0-4.42-3.58-8-8-8z" fill="#689f38"></path>

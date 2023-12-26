@@ -30,31 +30,31 @@ export function ActivityList({documents} : ActivityListProps){
 
     return (
         <>
-          <section className="w-11/12 relative flex justify-between items-center">
-          <svg width="24" height="24" viewBox="0 0 1024 1024" className="absolute ml-4" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1003.8 775.3l-639.5 1.8L682.7 355z" fill="#B6CDEF" />
-              <path d="M364.3 792.1c-5.7 0-10.9-3.2-13.4-8.3-2.5-5.1-2-11.2 1.4-15.7L670.7 346c2.8-3.7 7.2-6 11.9-6s9.1 2.2 11.9 5.9l321.1 420.4c3.5 4.5 4.1 10.6 1.5 15.7-2.5 5.1-7.7 8.4-13.4 8.4l-639.4 1.7c0.1 0 0.1 0 0 0z m318.5-412.3L394.5 762l579-1.6-290.7-380.6z" fill="#0F53A8" />
-              <path d="M1003.8 775.3l-152.1 0.5-169-420.8z" fill="#89B7F5" />
-              <path d="M851.7 790.8c-6.1 0-11.6-3.7-13.9-9.4l-169-420.8c-2.8-7 0-14.9 6.5-18.6 6.5-3.7 14.8-2 19.3 3.9l321.1 420.4c3.5 4.5 4.1 10.6 1.5 15.7-2.5 5.1-7.7 8.4-13.4 8.4l-152.1 0.4z m-114-339.1l124.1 309 111.7-0.3-235.8-308.7z" fill="#0F53A8" />
-              <path d="M761.5 774.8l-740.9 2 368.7-542.3z" fill="#B6CDEF" />
-              <path d="M20.6 791.8c-5.5 0-10.6-3.1-13.2-8-2.6-4.9-2.3-10.9 0.8-15.5L376.9 226c2.8-4.1 7.4-6.6 12.4-6.6 4.9 0 9.6 2.4 12.4 6.5l372.2 540.3c3.2 4.6 3.5 10.5 0.9 15.5-2.6 4.9-7.7 8-13.2 8l-741 2.1z m368.8-530.7L49 761.7l684-1.8-343.6-498.8z" fill="#0F53A8" />
-              <path d="M761.5 774.8l-271.7 2-100.5-542.3z" fill="#89B7F5" />
-              <path d="M489.8 791.8c-7.2 0-13.4-5.2-14.7-12.3L374.5 237.2c-1.3-7 2.5-13.9 9-16.6 6.5-2.7 14.1-0.5 18.1 5.3l372.2 540.3c3.2 4.6 3.5 10.5 1 15.4-2.6 4.9-7.6 8-13.2 8.1l-271.7 2c0 0.1-0.1 0.1-0.1 0.1zM416.9 301l85.4 460.7 230.8-1.7-316.2-459z" fill="#0F53A8" />
-          </svg>
+          <section className="flex justify-between items-center">
             
-
-          {/* <SearchBar/> */}
-          <Input
-            placeholder="search activity ..."
-            value={text}
-            onChange={(e) => {setText(e.target.value)}}
-            className="pl-10 m-2 bg-gray-300 border rounded-2xl hover:bg-gray-200"
-            />
-          
+            {/* <SearchBar/> */}
+            <div className="absolute w-3/12 h-11 mt-5 bg-slate-100 bg-opacity-100"/>
+            <Input
+              placeholder="search activity ..."
+              value={text}
+              onChange={(e) => {setText(e.target.value)}}
+              className="absolute w-1/5 pl-10 mt-5 ml-2 bg-gray-300 border rounded-xl hover:bg-gray-200 opacity-100"
+              />
+            
+            <svg width="24" height="24" viewBox="0 0 1024 1024" className="absolute ml-5 mt-5" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1003.8 775.3l-639.5 1.8L682.7 355z" fill="#B6CDEF" />
+                <path d="M364.3 792.1c-5.7 0-10.9-3.2-13.4-8.3-2.5-5.1-2-11.2 1.4-15.7L670.7 346c2.8-3.7 7.2-6 11.9-6s9.1 2.2 11.9 5.9l321.1 420.4c3.5 4.5 4.1 10.6 1.5 15.7-2.5 5.1-7.7 8.4-13.4 8.4l-639.4 1.7c0.1 0 0.1 0 0 0z m318.5-412.3L394.5 762l579-1.6-290.7-380.6z" fill="#0F53A8" />
+                <path d="M1003.8 775.3l-152.1 0.5-169-420.8z" fill="#89B7F5" />
+                <path d="M851.7 790.8c-6.1 0-11.6-3.7-13.9-9.4l-169-420.8c-2.8-7 0-14.9 6.5-18.6 6.5-3.7 14.8-2 19.3 3.9l321.1 420.4c3.5 4.5 4.1 10.6 1.5 15.7-2.5 5.1-7.7 8.4-13.4 8.4l-152.1 0.4z m-114-339.1l124.1 309 111.7-0.3-235.8-308.7z" fill="#0F53A8" />
+                <path d="M761.5 774.8l-740.9 2 368.7-542.3z" fill="#B6CDEF" />
+                <path d="M20.6 791.8c-5.5 0-10.6-3.1-13.2-8-2.6-4.9-2.3-10.9 0.8-15.5L376.9 226c2.8-4.1 7.4-6.6 12.4-6.6 4.9 0 9.6 2.4 12.4 6.5l372.2 540.3c3.2 4.6 3.5 10.5 0.9 15.5-2.6 4.9-7.7 8-13.2 8l-741 2.1z m368.8-530.7L49 761.7l684-1.8-343.6-498.8z" fill="#0F53A8" />
+                <path d="M761.5 774.8l-271.7 2-100.5-542.3z" fill="#89B7F5" />
+                <path d="M489.8 791.8c-7.2 0-13.4-5.2-14.7-12.3L374.5 237.2c-1.3-7 2.5-13.9 9-16.6 6.5-2.7 14.1-0.5 18.1 5.3l372.2 540.3c3.2 4.6 3.5 10.5 1 15.4-2.6 4.9-7.6 8-13.2 8.1l-271.7 2c0 0.1-0.1 0.1-0.1 0.1zM416.9 301l85.4 460.7 230.8-1.7-316.2-459z" fill="#0F53A8" />
+            </svg>          
           </section>
       
 
-      <section className="flex w-full flex-col pt-3">
+      <section className="flex w-full flex-col pt-3 mt-5">
       {documents.map((doc, i) => {
         // doc.document.title.includes(sp)
           if (doc.document.title.includes(text)) {
