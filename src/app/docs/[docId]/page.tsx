@@ -4,14 +4,14 @@ import { useDocument } from "@/hooks/useDocument";
 import {
   APIProvider,
   Map,
-  AdvancedMarker,
-  Pin,
-  InfoWindow
+  // AdvancedMarker,
+  // Pin,
+  // InfoWindow
 } from "@vis.gl/react-google-maps";
 
 
 function DocPage() {
-  const { title, setTitle, content, setContent } = useDocument();
+  // const { title, setTitle, content, setContent } = useDocument();
   const position = {lat: 53.54, lng: 10};
   return (
     <APIProvider apiKey="AIzaSyBfhfWnkyt-Ntum-ccYifY2ZCzw9hoF030">
