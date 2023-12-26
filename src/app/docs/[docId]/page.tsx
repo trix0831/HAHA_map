@@ -12,7 +12,7 @@ import {
 
 function DocPage() {
   // const { title, setTitle, content, setContent } = useDocument();
-  const position = {lat: 53.54, lng: 10};
+  const position = {lat: 23.97555, lng: 120.97361};
   return (
     <APIProvider apiKey="AIzaSyBfhfWnkyt-Ntum-ccYifY2ZCzw9hoF030">
       {/* <div className="w-full">
@@ -38,7 +38,7 @@ function DocPage() {
         </section>
       </div> */}
       <div style={{height: "100vh"}}>
-        <Map zoom={9} center={position}></Map>
+        <Map zoom={7} center={position}></Map>
       </div>
       </APIProvider>
   );
