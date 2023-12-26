@@ -35,7 +35,61 @@ export const usersTable = pgTable(
 
 export const usersRelations = relations(usersTable, ({ many }) => ({
   usersToDocumentsTable: many(usersToDocumentsTable),
+  usersToActivitiesTable: many(usersToActivitiesTable),
+  messages: many(messagesTable),
 }));
+
+export const activitiesTable = pgTable(
+  "activities",
+  {
+    id: serial("id").primaryKey(),
+    displayId: uuid("display_id").defaultRandom().notNull().unique(),
+    title: varchar("title", {length: 100}).notNull(),
+    description: text("description").notNull(),
+    organizer_id: uuid("display_id"),
+    location: varchar("location").notNull(),
+    schedule_name: text("schedule_name").array(),
+    schedule_location: text("schedule_location").array(),
+  },
+  (table) => ({
+    displayIdIndex: index("display_id_index").on(table.displayId),
+  })
+);
+
+export const activitiesRelations = relations(activitiesTable, ({many, one}) => ({
+  usersToActivitiesTable: many(usersToActivitiesTable),
+  organizer: one(usersTable, {
+    fields: [activitiesTable.organizer_id],
+    references: [usersTable.displayId],
+  }),
+  messages: many(messagesTable),
+}));
+
+export const messagesTable = pgTable(
+  "messages",
+  {
+    id: serial("id").primaryKey(),
+    displayId: uuid("display_id").defaultRandom().notNull().unique(),
+    content: text("content").notNull(),
+    time: text("time").notNull(),
+    senderId: uuid("display_id"),
+    activityId: uuid("display_id"),
+  },
+  (table) => ({
+    displayIdIndex: index("display_id_index").on(table.displayId),
+  })
+);
+
+export const messagesRelations = relations(messagesTable, ({one}) => ({
+  sender: one(usersTable, {
+    fields: [messagesTable.senderId],
+    references: [usersTable.displayId],
+  }),
+  activity: one(activitiesTable, {
+    fields: [messagesTable.activityId],
+    references: [activitiesTable.displayId],
+  })
+}))
 
 export const documentsTable = pgTable(
   "documents",
@@ -53,6 +107,48 @@ export const documentsTable = pgTable(
 export const documentsRelations = relations(documentsTable, ({ many }) => ({
   usersToDocumentsTable: many(usersToDocumentsTable),
 }));
+
+export const usersToActivitiesTable = pgTable(
+  "users_to_activities",
+  {
+    id: serial("id").primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => usersTable.displayId, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    activityId: uuid("document_id")
+      .notNull()
+      .references(() => activitiesTable.displayId, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+  },
+  (table) => ({
+    userAndActivityIndex: index("user_and_activity_index").on(
+      table.userId,
+      table.activityId,
+    ),
+    // This is a unique constraint on the combination of userId and documentId.
+    // This ensures that there is no duplicate entry in the table.
+    uniqCombination: unique().on(table.activityId, table.userId),
+  }),
+);
+
+export const usersToActivitiesRelations = relations(
+  usersToActivitiesTable,
+  ({ one }) => ({
+    document: one(activitiesTable, {
+      fields: [usersToActivitiesTable.activityId],
+      references: [activitiesTable.displayId],
+    }),
+    user: one(usersTable, {
+      fields: [usersToActivitiesTable.userId],
+      references: [usersTable.displayId],
+    }),
+  }),
+);
 
 export const usersToDocumentsTable = pgTable(
   "users_to_documents",
