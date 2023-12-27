@@ -1,6 +1,12 @@
-// import { useSession } from "next-auth/react";
+
 // import { useParams, useRouter } from "next/navigation";
 
-export const useActivity = () => {
+// export const useActivity = () => {
+//   const { docId } = useParams();
+//   const activityId = Array.isArray(docId) ? docId[0] : docId;
 
-}
+//   const editDescription =async () => {
+    
+//   }
+
+// }

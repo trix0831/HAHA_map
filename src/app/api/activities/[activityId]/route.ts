@@ -2,8 +2,10 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { z } from "zod";
 import { eq } from "drizzle-orm";
+
 import { db } from "@/db";
 import { activitiesTable, usersToActivitiesTable } from "@/db/schema";
+import { editLocationSchema } from "@/validators/updateActivity";
 
 
 const createActivityRequestSchema = z.object({
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
   const { title, description, dateStart, dateEnd, organizerId } = data as createActivityRequest;
 
   try {
-    const newActivity = (await db
+    const [newActivity] = (await db
       .insert(activitiesTable)
       .values({
         title,
@@ -44,7 +46,7 @@ export async function POST(request: NextRequest) {
         dateEnd,
         organizer_id: organizerId,
       })
-      .returning())[0];
+      .returning());
     await db.insert(usersToActivitiesTable).values({
         userId: organizerId,
         activityId: newActivity.displayId,
@@ -60,6 +62,7 @@ export async function POST(request: NextRequest) {
 
   return new NextResponse("OK", { status: 200 });
 }
+
 
 // Define a schema for activity update request
 const updateActivityRequestSchema = z.object({
