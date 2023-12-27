@@ -1,7 +1,15 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { documentsTable, usersToDocumentsTable, usersToActivitiesTable } from "@/db/schema";
+import { documentsTable, usersToDocumentsTable, usersToActivitiesTable, activitiesTable } from "@/db/schema";
+
+ export type createActivityInput = {
+  title: string;
+  description: string;
+  dateStart: string;
+  dateEnd: string;
+  organizerId: string;
+ }
 
 export const createDocument = async (userId: string) => {
   "use server";
@@ -89,4 +97,30 @@ export const getMyActivities = async (userId: string) => {
   }
 
   return activities;
+}
+
+export const createActivity = async ({title, description, dateStart, dateEnd, organizerId}: createActivityInput) => {
+  "use server";
+  console.log("createActivity");
+  const newActivity = (await db
+    .insert(activitiesTable)
+    .values({
+      title,
+      description,
+      dateStart,
+      dateEnd,
+      organizer_id: organizerId,
+    })
+    .returning()
+    )[0];
+  if(!newActivity){
+    return false;
+  }
+
+  await db.insert(usersToActivitiesTable).values({
+    userId: organizerId,
+    activityId: newActivity.displayId
+  })
+  
+  return newActivity
 }
