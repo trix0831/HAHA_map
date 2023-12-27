@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
@@ -17,6 +17,8 @@ function MapComponent() {
     id: 'dfb0ed321bfd06d3',
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"
   })
+
+
 
   const [map, setMap] = React.useState(null)
   console.log(map);
@@ -34,6 +36,15 @@ function MapComponent() {
     console.log(map);
   }, [])
 
+  function MarkerFinishDrag(event){
+    console.log(event.latLng.lat);
+    // console.log(event.latlng.lng());
+  }
+
+  function MarkerClicked(event){
+    console.log(event);
+  }
+
   return isLoaded ? (
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -42,8 +53,12 @@ function MapComponent() {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
+        <MarkerF
+          position={{lat: 23.97555, lng: 120.97361}}
+          draggable={true}
+          onClick={MarkerClicked}
+          onDragEnd={MarkerFinishDrag}
+        />
       </GoogleMap>
   ) : <></>
 }
