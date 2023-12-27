@@ -32,6 +32,7 @@ function DocPage() {
 
   return (
     <>
+    
       <div className="w-full flex">
         <nav className="sticky top-0 flex w-full justify-between p-2 shadow-sm ml-2">
           <input
