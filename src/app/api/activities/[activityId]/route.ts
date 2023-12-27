@@ -2,9 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { z } from "zod";
 import { eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { activitiesTable, usersToActivitiesTable } from "@/db/schema";
+import { editLocationSchema } from "@/validators/updateActivity";
 import { editLocationSchema } from "@/validators/updateActivity";
 
 
@@ -38,6 +40,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const [newActivity] = (await db
+    const [newActivity] = (await db
       .insert(activitiesTable)
       .values({
         title,
@@ -46,6 +49,7 @@ export async function POST(request: NextRequest) {
         dateEnd,
         organizer_id: organizerId,
       })
+      .returning());
       .returning());
     await db.insert(usersToActivitiesTable).values({
         userId: organizerId,
