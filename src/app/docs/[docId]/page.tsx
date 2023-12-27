@@ -42,7 +42,7 @@ function DocPage() {
               setTitle(e.target.value);
             }}
             placeholder="Document Title"
-            className="rounded-lg px-2 py-1 text-slate-700 outline-0 focus:bg-slate-100 text-2xl"
+            className="rounded-lg h-10 px-2 py-1 text-slate-700 outline-0 focus:bg-slate-100 text-2xl"
           />
         </nav>
 
@@ -56,13 +56,6 @@ function DocPage() {
           />
         </section> */}
 
-        <Button 
-          className={`fixed right-24 mr-10 top-3 z-50 w-fit ${participateState === "participated" ? "bg-green-500 text-white" : ""}`}
-          variant="outlined" 
-          onClick={a}
-        >
-          {participateState}
-        </Button>
 
         
       </div>
@@ -79,6 +72,8 @@ function DocPage() {
           {/* <div className="w-1/2 flex justify-center mt-6">
             <h1 className="text-5xl">title</h1>
           </div> */}
+
+
         </div>
 
         <div className="overflow-auto h-screen">
