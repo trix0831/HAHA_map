@@ -9,12 +9,17 @@ import {
   // InfoWindow
 } from "@vis.gl/react-google-maps";
 
+import MapPage from "./_components/map";
+
 
 function DocPage() {
   // const { title, setTitle, content, setContent } = useDocument();
   const position = {lat: 23.97555, lng: 120.97361};
+  const options = {
+
+  }
   return (
-    <APIProvider apiKey="AIzaSyBfhfWnkyt-Ntum-ccYifY2ZCzw9hoF030">
+    <APIProvider apiKey="AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k">
       {/* <div className="w-full">
         <nav className="sticky top-0 flex w-full justify-between p-2 shadow-sm">
           <input
@@ -41,7 +46,7 @@ function DocPage() {
 
         <div className="flex relative">
           <div style={{height: "70vh"}} className="w-1/2">
-            <Map zoom={9} center={position}></Map>
+            <MapPage/>
           </div>
 
           <div className="w-1/2 flex justify-center mt-6">
