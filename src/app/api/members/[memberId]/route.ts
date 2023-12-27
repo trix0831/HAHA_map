@@ -13,7 +13,10 @@ const addUserToActivityRequestSchema = z.object({
 type AddUserToActivityRequest = z.infer<typeof addUserToActivityRequestSchema>;
 
 // POST method to handle adding a user to an activity
-export async function POST(request: NextRequest) {
+export async function POST(
+    request: NextRequest,
+    {params}:{params:{userId: string, activityId: string}},
+    ) {
   const data = await request.json();
 
   // Validate the incoming request data
@@ -33,8 +36,8 @@ export async function POST(request: NextRequest) {
   // Insert the association into the 'users_to_activities' table
   try {
     await db.insert(usersToActivitiesTable).values({
-      userId: userId,
-      activityId: activityId,
+      userId: params.userId,
+      activityId: params.activityId,
     });
 
     return NextResponse.json({ message: "User added to activity successfully" }, { status: 200 });
@@ -45,3 +48,4 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Failed to add user to activity" }, { status: 500 });
   }
 }
+
