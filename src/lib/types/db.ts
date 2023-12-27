@@ -10,3 +10,18 @@ export type Document = {
   title: string;
   content: string;
 };
+
+export type Activity = {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  schedule_name: string[];
+  schedule_location: string[];
+}
+
+export type Message = {
+  id: string;
+  content: string;
+  time: string;
+}

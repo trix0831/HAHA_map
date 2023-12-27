@@ -37,8 +37,21 @@ function DocPage() {
           />
         </section>
       </div> */}
-      <div style={{height: "100vh"}}>
-        <Map zoom={7} center={position}></Map>
+      <div className="container mx-auto">
+
+        <div className="flex relative">
+          <div style={{height: "70vh"}} className="w-1/2">
+            <Map zoom={9} center={position}></Map>
+          </div>
+
+          <div className="w-1/2 flex justify-center mt-6">
+            <h1 className="text-5xl">title</h1>
+          </div>
+        </div>
+
+        <div className="overflow-auto h-screen">
+    
+        </div>
       </div>
       </APIProvider>
   );

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { usersTable, usersToDocumentsTable } from "@/db/schema";
+import { usersTable, usersToDocumentsTable, activitiesTable } from "@/db/schema";
 
 export async function getDocumentAuthors(docId: string) {
   const dbAuthors = await db.query.usersToDocumentsTable.findMany({
@@ -47,3 +47,14 @@ export const addDocumentAuthor = async (docId: string, email: string) => {
     userId: user.displayId,
   });
 };
+
+export const getActivityDetial = async (actId: string) => {
+  const activity = await db.query.activitiesTable.findFirst({
+    where: eq(activitiesTable.displayId, actId)
+  })
+  if(!activity){
+    return false;
+  }
+
+  return activity;
+}

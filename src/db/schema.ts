@@ -44,10 +44,11 @@ export const activitiesTable = pgTable(
   {
     id: serial("id").primaryKey(),
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
-    title: varchar("title", {length: 100}).notNull(),
+    title: text("title").notNull(),
     description: text("description").notNull(),
-    organizer_id: uuid("display_id"),
-    location: varchar("location").notNull(),
+    organizer_id: uuid("display_id").notNull(),
+    location: text("location").notNull(),
+    date: text('date').notNull(),
     schedule_name: text("schedule_name").array(),
     schedule_location: text("schedule_location").array(),
   },
@@ -139,7 +140,7 @@ export const usersToActivitiesTable = pgTable(
 export const usersToActivitiesRelations = relations(
   usersToActivitiesTable,
   ({ one }) => ({
-    document: one(activitiesTable, {
+    activity: one(activitiesTable, {
       fields: [usersToActivitiesTable.activityId],
       references: [activitiesTable.displayId],
     }),
