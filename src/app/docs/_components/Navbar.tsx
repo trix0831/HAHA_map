@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth";
 import { publicEnv } from "@/lib/env/public";
 
 import { createDocument, getDocuments } from "./actions";
+import CreateDialog from "./CreateDialog";
 
 import ActivityList from "./ActivityList";
 
@@ -89,6 +90,7 @@ async function Navbar() {
             <p>Only show my activities</p> 
           </button>
         </form>
+        <CreateDialog/>
       </nav>
       <section className="flex w-full flex-col pt-3">
         <ActivityList documents={documents} />
