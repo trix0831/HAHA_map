@@ -17,7 +17,7 @@ import { useDocument } from "@/hooks/useDocument";
 // import MapPage from "./_components/map";
 
 function DocPage() {
-  const { title, setTitle} = useDocument();
+  // const { title, setTitle} = useDocument();
   // , content, setContent 
   // const position = {lat: 23.97555, lng: 120.97361};
   // const [participateState, setParticipateState] = useState("participate");
@@ -35,14 +35,15 @@ function DocPage() {
     <>
       <div className="w-full flex">
         <nav className="sticky top-0 flex w-full justify-between p-2 shadow-sm ml-2">
-          <input
+          {/* <input
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
             placeholder="Document Title"
             className="rounded-lg h-10 px-2 py-1 text-slate-700 outline-0 focus:bg-slate-100 text-2xl"
-          />
+          /> */}
+          <p>title</p>
         </nav>
 
         {/* <section className="w-full px-4 py-4">

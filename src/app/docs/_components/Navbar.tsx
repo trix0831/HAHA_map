@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { publicEnv } from "@/lib/env/public";
 
-import { createDocument, getDocuments } from "./actions";
+import { createDocument, getAllActivities, getMyActivities } from "./actions";
 import CreateDialog from "./CreateDialog";
 
 import ActivityList from "./ActivityList";
@@ -17,7 +17,10 @@ async function Navbar() {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
   const userId = session.user.id;
-  const documents = await getDocuments(userId);
+  // const documents = await getDocuments(userId);
+
+  const allActivities = await getAllActivities();
+  const myActivities = await getMyActivities(userId);
 
   
   return (
@@ -93,7 +96,7 @@ async function Navbar() {
         <CreateDialog/>
       </nav>
       <section className="flex w-full flex-col pt-3">
-        <ActivityList documents={documents} />
+        <ActivityList allActivities={allActivities} myActivities={myActivities}/>
       </section>
     </nav>
   );
