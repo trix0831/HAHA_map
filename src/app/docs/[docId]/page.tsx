@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import { useDocument } from "@/hooks/useDocument";
 import { useState } from "react";
 
-import MemberDialog from "./_components/MemberDialog";
 
 import {
   APIProvider,
@@ -14,12 +13,13 @@ import {
   // InfoWindow
 } from "@vis.gl/react-google-maps";
 
-import MapPage from "./_components/map";
+// import MapPage from "./_components/map";
 
 
 function DocPage() {
-  const { title, setTitle, content, setContent } = useDocument();
-  const position = {lat: 23.97555, lng: 120.97361};
+  const { title, setTitle} = useDocument();
+  // , content, setContent 
+  // const position = {lat: 23.97555, lng: 120.97361};
   const [participateState, setParticipateState] = useState("participate");
 
   //define a function that alert("clicked")
@@ -55,14 +55,14 @@ function DocPage() {
         </section> */}
 
         <Button 
-          className={`mr-3 h-10 mt-5 w-fit ${participateState === "participated" ? "bg-green-500 text-white" : ""}`}
+          className={`fixed right-24 mr-10 top-3 z-50 w-fit ${participateState === "participated" ? "bg-green-500 text-white" : ""}`}
           variant="outlined" 
           onClick={a}
         >
           {participateState}
         </Button>
 
-        <MemberDialog/>
+        
       </div>
 
 
@@ -70,7 +70,7 @@ function DocPage() {
 
         <div className="flex relative">
           <div style={{height: "70vh"}} className="w-1/2">
-            <Map zoom={7} center={position}></Map>
+            {/* <Map zoom={7} center={position}></Map> */}
           </div>
 
           {/* <div className="w-1/2 flex justify-center mt-6">
