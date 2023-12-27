@@ -47,7 +47,7 @@ export const activitiesTable = pgTable(
     title: text("title").notNull(),
     description: text("description").notNull(),
     organizer_id: uuid("display_id").notNull(),
-    location: text("location").notNull(),
+    location: text("location"),
     dateStart: text('date_end').notNull(),
     dateEnd: text("date_start").notNull(),
     schedule_name: text("schedule_name").array(),

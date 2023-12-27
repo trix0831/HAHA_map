@@ -9,7 +9,6 @@ import { activitiesTable, usersToActivitiesTable } from "@/db/schema";
 const createActivityRequestSchema = z.object({
   title: z.string().min(1).max(30),
   description: z.string().min(10).max(300),
-  location: z.string(),
   dateStart: z.string(),
   dateEnd: z.string(),
   organizerId: z.string(),
@@ -33,7 +32,7 @@ export async function POST(request: NextRequest) {
   // the `as` keyword is a type assertion, this tells typescript
   // that we know what we're doing and that the data is of type LikeTweetRequest.
   // This is safe now because we've already validated the data with zod.
-  const { title, description, location, dateStart, dateEnd, organizerId } = data as createActivityRequest;
+  const { title, description, dateStart, dateEnd, organizerId } = data as createActivityRequest;
 
   try {
     const newActivity = (await db
@@ -41,7 +40,6 @@ export async function POST(request: NextRequest) {
       .values({
         title,
         description, 
-        location,
         dateStart,
         dateEnd,
         organizer_id: organizerId,
