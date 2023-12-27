@@ -31,7 +31,7 @@ export async function POST(
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const { userId, activityId } = validatedData;
+  // const { userId, activityId } = validatedData;
 
   // Insert the association into the 'users_to_activities' table
   try {
