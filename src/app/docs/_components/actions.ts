@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { documentsTable, usersToDocumentsTable } from "@/db/schema";
+import { documentsTable, usersToDocumentsTable, usersToActivitiesTable } from "@/db/schema";
 
 export const createDocument = async (userId: string) => {
   "use server";
@@ -49,3 +49,42 @@ export const deleteDocument = async (documentId: string) => {
     .where(eq(documentsTable.displayId, documentId));
   return;
 };
+
+export const getAllActivities  = async () => {
+  "use server";
+  console.log("getAllActivities");
+  const activities = await db.query.activitiesTable.findMany({
+    columns: {
+      displayId: true,
+      title: true,
+      date: true,
+    }
+  })
+  if(!activities){
+    return false;
+  }
+
+  return activities;
+}
+
+export const getMyActivities = async (userId: string) => {
+  "use server";
+  console.log("getMyActivities");
+  const activities = await db.query.usersToActivitiesTable.findMany({
+    where: eq(usersToActivitiesTable.userId, userId),
+    with: {
+      activity: {
+        columns: {
+          displayId: true,
+          title: true,
+          date: true,
+        }
+      }
+    }
+  })
+  if(!activities){
+    return false;
+  }
+
+  return activities;
+}
