@@ -36,7 +36,8 @@ export const usersTable = pgTable(
 export const usersRelations = relations(usersTable, ({ many }) => ({
   usersToDocumentsTable: many(usersToDocumentsTable),
   usersToActivitiesTable: many(usersToActivitiesTable),
-  messages: many(messagesTable),
+  activitiesTable: many(activitiesTable),
+  messagesTable: many(messagesTable),
 }));
 
 export const activitiesTable = pgTable(
@@ -46,7 +47,7 @@ export const activitiesTable = pgTable(
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     title: text("title").notNull(),
     description: text("description").notNull(),
-    organizer_id: uuid("display_id").notNull(),
+    organizer_id: uuid("organizer_id").notNull(),
     location: text("location"),
     dateStart: text('date_end').notNull(),
     dateEnd: text("date_start").notNull(),
@@ -64,7 +65,7 @@ export const activitiesRelations = relations(activitiesTable, ({many, one}) => (
     fields: [activitiesTable.organizer_id],
     references: [usersTable.displayId],
   }),
-  messages: many(messagesTable),
+  messagesTable: many(messagesTable),
 }));
 
 export const messagesTable = pgTable(
@@ -74,8 +75,8 @@ export const messagesTable = pgTable(
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     content: text("content").notNull(),
     time: text("time").notNull(),
-    senderId: uuid("display_id"),
-    activityId: uuid("display_id"),
+    senderId: uuid("sender_id"),
+    activityId: uuid("activity_id"),
   },
   (table) => ({
     displayIdIndex: index("display_id_index").on(table.displayId),
