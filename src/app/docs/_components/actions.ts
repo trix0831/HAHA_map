@@ -102,7 +102,7 @@ export const getMyActivities = async (userId: string) => {
 export const createActivity = async ({title, description, dateStart, dateEnd, organizerId}: createActivityInput) => {
   "use server";
   console.log("createActivity");
-  const newActivity = (await db
+  const [newActivity] = (await db
     .insert(activitiesTable)
     .values({
       title,
@@ -112,7 +112,7 @@ export const createActivity = async ({title, description, dateStart, dateEnd, or
       organizer_id: organizerId,
     })
     .returning()
-    )[0];
+    );
   if(!newActivity){
     return false;
   }
