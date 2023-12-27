@@ -1,15 +1,17 @@
 import { eq } from "drizzle-orm";
 
+import {z} from "zod";
+
 import { db } from "@/db";
 import { documentsTable, usersToDocumentsTable, usersToActivitiesTable, activitiesTable } from "@/db/schema";
 
- export type createActivityInput = {
-  title: string;
-  description: string;
-  dateStart: string;
-  dateEnd: string;
-  organizerId: string;
- }
+//  export type createActivityInput = {
+//   title: string;
+//   description: string;
+//   dateStart: string;
+//   dateEnd: string;
+//   organizerId: string;
+//  }
 
 export const createDocument = async (userId: string) => {
   "use server";
@@ -99,7 +101,18 @@ export const getMyActivities = async (userId: string) => {
   return activities;
 }
 
-export const createActivity = async ({title, description, dateStart, dateEnd, organizerId}: createActivityInput) => {
+const createActivityRequestSchema = z.object({
+  title: z.string().min(1).max(30),
+  description: z.string().min(10).max(300),
+  dateStart: z.string(),
+  dateEnd: z.string(),
+  organizerId: z.string(),
+});
+
+// you can use z.infer to get the typescript type from a zod schema
+type createActivityRequest = z.infer<typeof createActivityRequestSchema>;
+
+export const createActivity = async ({title, description, dateStart, dateEnd, organizerId}: createActivityRequest) => {
   "use server";
   console.log("createActivity");
   const newActivity = (await db

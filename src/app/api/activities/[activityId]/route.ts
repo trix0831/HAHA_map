@@ -1,9 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { z } from "zod";
+import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { activitiesTable, usersToActivitiesTable } from "@/db/schema";
+import { editLocationSchema } from "@/validators/updateActivity";
 
 
 const createActivityRequestSchema = z.object({
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
   const { title, description, dateStart, dateEnd, organizerId } = data as createActivityRequest;
 
   try {
-    const newActivity = (await db
+    const [newActivity] = (await db
       .insert(activitiesTable)
       .values({
         title,
@@ -44,7 +46,7 @@ export async function POST(request: NextRequest) {
         dateEnd,
         organizer_id: organizerId,
       })
-      .returning())[0];
+      .returning());
     await db.insert(usersToActivitiesTable).values({
         userId: organizerId,
         activityId: newActivity.displayId,
@@ -59,4 +61,40 @@ export async function POST(request: NextRequest) {
   }
 
   return new NextResponse("OK", { status: 200 });
+}
+
+export async function PUT(req: NextRequest,
+    {params}: {params:{activityId: string}},
+) {
+    const reqBody = await req.json();
+    let validatedReqBody;
+
+    if(reqBody.location){
+        try {
+            validatedReqBody = editLocationSchema.parse(reqBody);
+          } catch (error) {
+            return NextResponse.json({ error: "Bad Request" }, { status: 400 });
+          }
+      
+          const [updateAc] = await db
+              .update(activitiesTable)
+              .set({
+                  location: validatedReqBody.location
+              })
+              .where(eq(activitiesTable.displayId, params.activityId))
+              .returning();
+          if(!updateAc){
+              return false;
+          }
+      
+          return NextResponse.json(
+              {
+                id: updateAc.displayId,
+                location: updateAc.location,
+              },
+              { status: 200 },
+          );
+    }
+    
+    
 }
