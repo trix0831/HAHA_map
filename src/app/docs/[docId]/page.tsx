@@ -24,7 +24,10 @@ function DocPage() {
 
   //define a function that alert("clicked")
   const a = () => {
-    alert("clicked");
+    if(participateState === "participate")
+      setParticipateState("participated");
+    else
+      setParticipateState("participate");
   };
 
   return (
@@ -52,11 +55,10 @@ function DocPage() {
         </section> */}
 
         <Button 
-          // className="relative top-3 right-3 mt-2 mr-2"
-          className='mr-3 h-10 mt-5 w-fit'
+          className={`mr-3 h-10 mt-5 w-fit ${participateState === "participated" ? "bg-green-500 text-white" : ""}`}
           variant="outlined" 
           onClick={a}
-          >
+        >
           {participateState}
         </Button>
 
