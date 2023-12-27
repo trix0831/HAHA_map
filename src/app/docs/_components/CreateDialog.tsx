@@ -46,7 +46,9 @@ async function CreateDialog() {
 
             const createData={title:title, description:description, dateStart:dateStart, dateEnd:dateEnd, organizerId:userId}
 
+
             const result = await createActivity(createData);
+
             
             // if (!result) {
             //   redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/docs/${docId}`);
