@@ -3,7 +3,7 @@
 // import { useDocument } from "@/hooks/useDocument";
 import {
   APIProvider,
-  Map,
+  // Map,
   // AdvancedMarker,
   // Pin,
   // InfoWindow
@@ -14,10 +14,10 @@ import MapPage from "./_components/map";
 
 function DocPage() {
   // const { title, setTitle, content, setContent } = useDocument();
-  const position = {lat: 23.97555, lng: 120.97361};
-  const options = {
+  // const position = {lat: 23.97555, lng: 120.97361};
+  // const options = {
 
-  }
+  // }
   return (
     <APIProvider apiKey="AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k">
       {/* <div className="w-full">
