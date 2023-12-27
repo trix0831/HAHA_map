@@ -2,9 +2,8 @@
 
 
 import MapComponent from "./_components/map";
-import Button from '@mui/material/Button';
 import { useDocument } from "@/hooks/useDocument";
-import { useState } from "react";
+// import { useState } from "react";
 
 
 // import {
@@ -21,15 +20,15 @@ function DocPage() {
   const { title, setTitle} = useDocument();
   // , content, setContent 
   // const position = {lat: 23.97555, lng: 120.97361};
-  const [participateState, setParticipateState] = useState("participate");
+  // const [participateState, setParticipateState] = useState("participate");
 
   //define a function that alert("clicked")
-  const a = () => {
-    if(participateState === "participate")
-      setParticipateState("participated");
-    else
-      setParticipateState("participate");
-  };
+  // const a = () => {
+  //   if(participateState === "participate")
+  //     setParticipateState("participated");
+  //   else
+  //     setParticipateState("participate");
+  // };
 
   return (
 

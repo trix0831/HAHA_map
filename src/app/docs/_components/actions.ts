@@ -115,7 +115,7 @@ type createActivityRequest = z.infer<typeof createActivityRequestSchema>;
 export const createActivity = async ({title, description, dateStart, dateEnd, organizerId}: createActivityRequest) => {
   "use server";
   console.log("createActivity");
-  const newActivity = (await db
+  const [newActivity] = (await db
     .insert(activitiesTable)
     .values({
       title,
@@ -125,7 +125,7 @@ export const createActivity = async ({title, description, dateStart, dateEnd, or
       organizer_id: organizerId,
     })
     .returning()
-    )[0];
+    );
   if(!newActivity){
     return false;
   }
