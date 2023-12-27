@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { z } from "zod";
-
+import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { activitiesTable, usersToActivitiesTable } from "@/db/schema";
 
@@ -59,4 +59,65 @@ export async function POST(request: NextRequest) {
   }
 
   return new NextResponse("OK", { status: 200 });
+}
+
+// Define a schema for activity update request
+const updateActivityRequestSchema = z.object({
+  activityId: z.string().uuid(), // Ensure that the activityId is a valid UUID
+  title: z.string().min(1).max(30).optional(),
+  description: z.string().min(10).max(300).optional(),
+  dateStart: z.string().optional(),
+  dateEnd: z.string().optional(),
+});
+
+// Infer the TypeScript type from the zod schema
+type UpdateActivityRequest = z.infer<typeof updateActivityRequestSchema>;
+
+// PUT method to handle updating an activity's details
+export async function PUT(request: NextRequest) {
+  const data = await request.json();
+
+  // Validate the incoming request data
+  let validatedData: UpdateActivityRequest;
+  try {
+    validatedData = updateActivityRequestSchema.parse(data);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ errors: error.errors }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+
+  const { activityId, title, description, dateStart, dateEnd } = validatedData;
+
+  // Perform the update in the database
+  try {
+    const updateData: any = {};
+    if (title) updateData.title = title;
+    if (description) updateData.description = description;
+    if (dateStart) updateData.dateStart = dateStart;
+    if (dateEnd) updateData.dateEnd = dateEnd;
+
+    const updatedActivity = await db
+      .update(activitiesTable)
+      .set(updateData)
+      .where(eq(activitiesTable.displayId,activityId))
+      .returning()
+      .execute();
+
+    if (!updatedActivity) {
+      return NextResponse.json(
+        { error: "Activity not found or no changes were made." },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({ message: "Activity updated successfully" }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Failed to update activity" },
+      { status: 500 },
+    );
+  }
 }
