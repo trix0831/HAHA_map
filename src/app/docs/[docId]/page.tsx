@@ -1,20 +1,21 @@
 "use client";
 
+
+import MapComponent from "./_components/map";
 import Button from '@mui/material/Button';
 import { useDocument } from "@/hooks/useDocument";
 import { useState } from "react";
 
 
-import {
-  APIProvider,
-  // Map,
-  // AdvancedMarker,
-  // Pin,
-  // InfoWindow
-} from "@vis.gl/react-google-maps";
+// import {
+//   APIProvider,
+//   // Map,
+//   // AdvancedMarker,
+//   // Pin,
+//   // InfoWindow
+// } from "@vis.gl/react-google-maps";
 
 // import MapPage from "./_components/map";
-
 
 function DocPage() {
   const { title, setTitle} = useDocument();
@@ -31,7 +32,8 @@ function DocPage() {
   };
 
   return (
-    <APIProvider apiKey="AIzaSyBfhfWnkyt-Ntum-ccYifY2ZCzw9hoF030">
+
+    <>
       <div className="w-full flex">
         <nav className="sticky top-0 flex w-full justify-between p-2 shadow-sm ml-2">
           <input
@@ -71,6 +73,7 @@ function DocPage() {
         <div className="flex relative">
           <div style={{height: "70vh"}} className="w-1/2">
             {/* <Map zoom={7} center={position}></Map> */}
+            <MapComponent/>
           </div>
 
           {/* <div className="w-1/2 flex justify-center mt-6">
@@ -82,7 +85,7 @@ function DocPage() {
     
         </div>
       </div>
-      </APIProvider>
+    </>
   );
 }
 
