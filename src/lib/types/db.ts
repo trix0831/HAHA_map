@@ -16,6 +16,8 @@ export type Activity = {
   title: string;
   description: string;
   location: string;
+  dateStart: string;
+  dateEnd: string;
   schedule_name: string[];
   schedule_location: string[];
 }

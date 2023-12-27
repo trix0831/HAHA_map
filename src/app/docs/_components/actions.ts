@@ -57,7 +57,8 @@ export const getAllActivities  = async () => {
     columns: {
       displayId: true,
       title: true,
-      date: true,
+      dateStart: true,
+      dateEnd: true,
     }
   })
   if(!activities){
@@ -77,7 +78,8 @@ export const getMyActivities = async (userId: string) => {
         columns: {
           displayId: true,
           title: true,
-          date: true,
+          dateStart: true,
+          dateEnd: true,
         }
       }
     }
