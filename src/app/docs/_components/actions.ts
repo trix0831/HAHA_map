@@ -67,13 +67,8 @@ export const getAllActivities  = async () => {
     columns: {
       displayId: true,
       title: true,
-      dateStart: true,
-      dateEnd: true,
     }
   })
-  if(!activities){
-    return false;
-  }
 
   return activities;
 }
@@ -81,21 +76,20 @@ export const getAllActivities  = async () => {
 export const getMyActivities = async (userId: string) => {
   "use server";
   console.log("getMyActivities");
-  const activities = await db.query.usersToActivitiesTable.findMany({
+  const activities_temp = await db.query.usersToActivitiesTable.findMany({
     where: eq(usersToActivitiesTable.userId, userId),
     with: {
       activity: {
         columns: {
           displayId: true,
           title: true,
-          dateStart: true,
-          dateEnd: true,
         }
       }
     }
   })
-  if(!activities){
-    return false;
+  const activities:{title: string, displayId: string}[] = [];
+  for(let i = 0; i < activities_temp.length; i++){
+    activities.push(activities_temp[i].activity);
   }
 
   return activities;

@@ -12,6 +12,10 @@ import { auth } from "@/lib/auth";
 
 import { createActivity } from "./actions";
 
+import { redirect } from "next/navigation";
+import { publicEnv } from "@/lib/env/public";
+import { revalidatePath } from "next/cache";
+
 
 async function CreateDialog() {
   const session = await auth();
@@ -48,12 +52,12 @@ async function CreateDialog() {
 
 
             const result = await createActivity(createData);
-
-            
-            // if (!result) {
-            //   redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/docs/${docId}`);
-            // }
-            // revalidatePath(`${publicEnv.NEXT_PUBLIC_BASE_URL}/docs/${docId}`);
+            if(!result){
+              console.log("can't create");
+            }else{
+              revalidatePath("/docs");
+              redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/docs/${result.displayId}`)
+            }
           }}
           className="flex flex-row gap-4"
         >
