@@ -119,6 +119,7 @@ export const createActivity = async ({title, description, dateStart, dateEnd, or
       organizer_id: organizerId,
       schedule_name: [],
       schedule_location: [],
+      location: "23.97555-120.97361"
     })
     .returning()
     );
