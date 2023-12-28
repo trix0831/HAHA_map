@@ -15,7 +15,7 @@ export type Activity = {
   displayId: string;
   title: string;
   description: string;
-  location: string|null;
+  location: string;
   dateStart: string;
   dateEnd: string;
   schedule_name: string[];

@@ -12,7 +12,7 @@ export const useActivity = () => {
   const activityId = Array.isArray(docId) ? docId[0] : docId;
 
   const [description, setDescription] = useState<string>("");
-  const [location, setLocation] = useState<string|null>(null);
+  const [location, setLocation] = useState<string>("");
   const [members, setMembers] = useState<memberType[]>([]);
   const [dateStart, setDateStart] = useState<string>("");
   const [dateEnd, setDateEnd] = useState<string>("");
@@ -67,7 +67,7 @@ export const useActivity = () => {
     editActivity();
   }
 
-  const setLoca = (lo: string|null) => {
+  const setLoca = (lo: string) => {
     setLocation(lo);
     editActivity();
   }
