@@ -11,7 +11,7 @@ export const useActivity = () => {
   const { docId } = useParams();
   const activityId = Array.isArray(docId) ? docId[0] : docId;
 
-  const [description, setDescription] = useState<string>("");
+  const [description, setDescription] = useState<string>("a");
   const [location, setLocation] = useState<string>("");
   const [members, setMembers] = useState<memberType[]>([]);
   const [dateStart, setDateStart] = useState<string>("");
@@ -62,53 +62,52 @@ export const useActivity = () => {
     }
   }
 
-  const setDes = (des: string) => {
+  const setDes = async (des: string) => {
     setDescription(des);
-    editActivity();
+    // await editActivity();
   }
 
-  const saveLoca = () => {
-    // console.log("save");
-    editActivity();
+  const save =async () => {
+    await editActivity();
   }
 
   const setLoca = (lo: string) => {
     setLocation(lo);
   }
 
-  const addMem = (userId: string) => {
-    editMembers(userId);
+  const addMem = async (userId: string) => {
+    await editMembers(userId);
   }
 
   const setMem = (mem: memberType[]) => {
     setMembers(mem);
   }
 
-  const setDateS = (s: string) => {
+  const setDateS = async (s: string) => {
     setDateStart(s);
-    editActivity();
+    // await editActivity();
   }
 
-  const setDateE = (e: string) => {
+  const setDateE = async (e: string) => {
     setDateEnd(e);
-    editActivity();
+    // await editActivity();
   }
 
-  const setSchName = (name: string[]) => {
+  const setSchName = async (name: string[]) => {
     setScheduleName(name);
-    editActivity();
+    // await editActivity();
   }
 
-  const setSchLoca = (lo: string[]) => {
+  const setSchLoca = async (lo: string[]) => {
     setScheduleLocation(lo);
-    editActivity();
+    // await editActivity();
   }
 
   
 return{
   setDes,
   setLoca,
-  saveLoca,
+  save,
   setMem,
   addMem,
   setDateS, 
