@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -6,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { publicEnv } from "@/lib/env/public";
 
-import { createDocument, getAllActivities, getMyActivities } from "./actions";
+import { getAllActivities, getMyActivities } from "./actions";
 import CreateDialog from "./CreateDialog";
 
 import ActivityList from "./ActivityList";

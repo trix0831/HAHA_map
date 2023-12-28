@@ -8,9 +8,9 @@ const containerStyle = {
   height: '100vh'
 };
 
-type MapProps = {
-  location: string;
-}
+// type MapProps = {
+//   location: string;
+// }
 
 const center = {
   lat: 23.97555, lng: 120.97361
