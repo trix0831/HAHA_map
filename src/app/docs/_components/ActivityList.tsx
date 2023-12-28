@@ -37,7 +37,7 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
     setAll(allActivities);
     setMy(myActivities);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [allActivities, myActivities])
 
   const [mine, setMine] = useState<boolean>(false);
   
