@@ -20,6 +20,7 @@ export const useActivity = () => {
   const [scheduleLocation, setScheduleLocation] = useState<string[]>([]);
 
   const editActivity = async() => {
+    console.log("putting to backend");
     const res = await fetch(`/api/activities/${activityId}`, {
       method: "PUT",
       headers: {
@@ -30,8 +31,8 @@ export const useActivity = () => {
         location: location,
         dateStart: dateStart,
         dateEnd: dateEnd,
-        scheduleName: scheduleName,
-        scheduleLocation: scheduleLocation,
+        schedule_name: scheduleName,
+        schedule_location: scheduleLocation,
       }),
     });
     if (!res.ok) {

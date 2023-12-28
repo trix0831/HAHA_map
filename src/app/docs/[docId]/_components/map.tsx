@@ -53,7 +53,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
 
   function MarkerFinishDrag(event){
     const coordArray = [event.latLng.lat(), event.latLng.lng()]
-    console.log(coordArray);
+    // console.log(coordArray);
     // console.log(event.latLng.lat());
     // console.log(event.latLng.lng());
     setLoca(coordArray.join("-"));

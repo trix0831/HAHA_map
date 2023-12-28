@@ -10,32 +10,47 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { auth } from "@/lib/auth";
 
 
 type Props = {
     setName: (name) => void;
-    setLoca:(lo: string[]) => void;
+    setSchLoca:(lo:string[]) => void;
+    location: string;
+    save: () => void;
+    schLoca: string[];
 };
 
-async function AddScheduleDialog({setName, setLoca}: Props) {
-  const session = await auth();
-  if (!session?.user?.id) return null;
-  //   const userId = session.user.id;
+function AddScheduleDialog({setName, setSchLoca, location, save, schLoca}: Props) {
   const nameInputRef = useRef<HTMLInputElement>(null);
 
-  const handleSave = () => {
+  async function handleSave (){
     const name = nameInputRef.current?.value;
     const nameStr = name?.toString();
 
-    if(name !== undefined)
-        setName((prev:string[]) => [...prev, nameStr]);
-  };
+    if(name !== undefined){
+        await setName((prev:string[]) => [...prev, nameStr]);
+        // alert(nameStr);
+        save();
+    }
+    
+    if(location !== undefined){
+        // alert("location array");
+        // alert([...schLoca, location]);
+        // setSchLoca((prev:string[]) => [...prev, location]);
+        await setSchLoca([...schLoca, location])
+        save();
+        // alert(location);
+    }
+    // alert(schLoca);
+    // alert("I'm gonna save!!1");
+    
+    // save();
+};
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="mr-2" variant={"outlined"}>Members</Button>
+        <Button className="mr-2" variant={"outlined"}>Add Schedule</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -47,9 +62,12 @@ async function AddScheduleDialog({setName, setLoca}: Props) {
         placeholder="Give it a name !" 
         ref={nameInputRef} 
         />
+
         <Button
             onClick={handleSave}
-        >Add</Button>
+        >
+            Add
+        </Button>
 
       </DialogContent>
     </Dialog>
