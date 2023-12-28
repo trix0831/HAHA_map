@@ -12,10 +12,10 @@ export type Document = {
 };
 
 export type Activity = {
-  id: string;
+  displayId: string;
   title: string;
   description: string;
-  location: string;
+  location: string|null;
   dateStart: string;
   dateEnd: string;
   schedule_name: string[];

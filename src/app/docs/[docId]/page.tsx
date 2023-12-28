@@ -1,25 +1,33 @@
-"use client";
+// import MapComponent from "./_components/map";
+import { getActivityMembers, getActivityDetial } from "./_components/actions";
+import type { Activity } from "@/lib/types/db";
+// import type { NextRequest } from 'next/server';
+import AllPage from "./_components/Allpage";
 
+type memberType = {
+  displayId: string;
+  username: string;
+  email: string;
+}
 
-import MapComponent from "./_components/map";
-// import { useDocument } from "@/hooks/useDocument";
-// import { useState } from "react";
+type Props = {
+  params: { docId: string };
+};
 
+async function DocPage({params}: Props) {
+  const activityId = params.docId;
+  // console.log("id");
+  // console.log(activityId);
 
-// import {
-//   APIProvider,
-//   // Map,
-//   // AdvancedMarker,
-//   // Pin,
-//   // InfoWindow
-// } from "@vis.gl/react-google-maps";
+  let members: memberType[] = [];
+  let activity: Activity | undefined;
+  if(activityId){
+    members = await getActivityMembers(activityId);
+    activity = await getActivityDetial(activityId);
+  }
 
-// import MapPage from "./_components/map";
-
-function DocPage() {
-  // const { title, setTitle} = useDocument();
-  // , content, setContent 
-  // const position = {lat: 23.97555, lng: 120.97361};
+  const temp = {activity: activity, members: members};
+  
   // const [participateState, setParticipateState] = useState("participate");
 
   //define a function that alert("clicked")
@@ -34,51 +42,7 @@ function DocPage() {
 
     <>
       <div className="w-full flex">
-        <nav className="sticky top-0 flex w-full justify-between p-2 shadow-sm ml-2">
-          {/* <input
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            placeholder="Document Title"
-            className="rounded-lg h-10 px-2 py-1 text-slate-700 outline-0 focus:bg-slate-100 text-2xl"
-          /> */}
-          <p>title</p>
-        </nav>
-
-        {/* <section className="w-full px-4 py-4">
-          <textarea
-            value={content || ""}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-            className="h-[80vh] w-full outline-0 "
-          />
-        </section> */}
-
-
-        
-      </div>
-
-
-      <div className="container mx-auto">
-
-        <div className="flex relative">
-          <div style={{height: "70vh"}} className="w-1/2">
-            {/* <Map zoom={7} center={position}></Map> */}
-            <MapComponent/>
-          </div>
-
-          {/* <div className="w-1/2 flex justify-center mt-6">
-            <h1 className="text-5xl">title</h1>
-          </div> */}
-
-
-        </div>
-
-        <div className="overflow-auto h-screen">
-    
-        </div>
+        <AllPage {...temp}/>
       </div>
     </>
   );
