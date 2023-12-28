@@ -131,8 +131,8 @@ export async function POST(request: NextRequest) {
 
 // Define the schema for the activity update request
 const updateActivityRequestSchema = z.object({
-  title: z.string().min(1).max(30).optional(),
-  description: z.string().min(10).max(300).optional(),
+  // title: z.string().min(1).max(30).optional(),
+  description: z.string().min(1).max(300).optional(),
   dateStart: z.string().optional(),
   dateEnd: z.string().optional(),
   location: z.string().optional(),
@@ -148,6 +148,7 @@ export async function PUT(
   {params}:{params:{activityId: string}},
   ) {
   const data = await request.json();
+  console.log(data);
 
   // Validate the incoming request data
 
@@ -158,11 +159,11 @@ export async function PUT(
   }
 
   // Destructure the validated data
-  const { title, description, dateStart, dateEnd, location, schedule_name, schedule_location } = data as UpdateActivityRequest;
+  const { description, dateStart, dateEnd, location, schedule_name, schedule_location } = data as UpdateActivityRequest;
 
   // Construct the update payload, excluding undefined values
   const updatePayload: Partial<UpdateActivityRequest> = {};
-  if (title !== undefined) updatePayload.title = title;
+  // if (title !== undefined) updatePayload.title = title;
   if (description !== undefined) updatePayload.description = description;
   if (dateStart !== undefined) updatePayload.dateStart = dateStart;
   if (dateEnd !== undefined) updatePayload.dateEnd = dateEnd;

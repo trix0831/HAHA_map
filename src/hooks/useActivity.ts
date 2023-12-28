@@ -20,7 +20,7 @@ export const useActivity = () => {
   const [scheduleLocation, setScheduleLocation] = useState<string[]>([]);
 
   const editActivity = async() => {
-    const res = await fetch(`/api/activity/${activityId}`, {
+    const res = await fetch(`/api/activities/${activityId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,9 +67,13 @@ export const useActivity = () => {
     editActivity();
   }
 
+  const saveLoca = () => {
+    // console.log("save");
+    editActivity();
+  }
+
   const setLoca = (lo: string) => {
     setLocation(lo);
-    editActivity();
   }
 
   const addMem = (userId: string) => {
@@ -104,6 +108,7 @@ export const useActivity = () => {
 return{
   setDes,
   setLoca,
+  saveLoca,
   setMem,
   addMem,
   setDateS, 
