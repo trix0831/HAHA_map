@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
 // Define the schema for the activity update request
 const updateActivityRequestSchema = z.object({
   // title: z.string().min(1).max(30).optional(),
-  description: z.string().min(1).max(300).optional(),
+  description: z.string().optional(),
   dateStart: z.string().optional(),
   dateEnd: z.string().optional(),
   location: z.string().optional(),
@@ -148,7 +148,7 @@ export async function PUT(
   {params}:{params:{activityId: string}},
   ) {
   const data = await request.json();
-  console.log(data);
+  // console.log(data);
 
   // Validate the incoming request data
 
