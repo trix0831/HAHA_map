@@ -8,24 +8,31 @@ const containerStyle = {
   height: '100vh'
 };
 
-// type MapProps = {
-//   location: string;
-// }
-
-const center = {
-  lat: 23.97555, lng: 120.97361
+type MapProps = {
+  location: string;
+  setLocation: (location: string) => void;
 };
 
-function MapComponent() {
+// const center = {
+//   lat: 23.97555, lng: 120.97361
+// };
+
+function MapComponent({ location, setLocation }: MapProps) {
   const { isLoaded } = useJsApiLoader({
     id: 'dfb0ed321bfd06d3',
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"
   })
+  const latlngArr = location.split("/").map(Number);
+  const center = {lat: latlngArr[0], lng: latlngArr[1]};
+  
+  // const center = {
+  //   lat: location.lat, lng: location.lng
+  // }
 
 
 
   const [map, setMap] = React.useState(null)
-  console.log(map);
+  // console.log(map);
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -37,12 +44,15 @@ function MapComponent() {
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
-    console.log(map);
+    // console.log(map);
   }, [])
 
   function MarkerFinishDrag(event){
-    console.log(event.latLng.lat());
-    console.log(event.latLng.lng());
+    const coordArray = [event.latLng.lat(), event.latLng.lng()]
+    console.log(coordArray);
+    // console.log(event.latLng.lat());
+    // console.log(event.latLng.lng());
+    setLocation(coordArray.join("/"));
   }
 
   // function MarkerClicked(event){
@@ -58,7 +68,7 @@ function MapComponent() {
         onUnmount={onUnmount}
       >
         <MarkerF
-          position={{lat: 23.97555, lng: 120.97361}}
+          position={center}
           draggable={true}
           onDragEnd={MarkerFinishDrag}
         />
