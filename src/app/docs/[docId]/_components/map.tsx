@@ -8,9 +8,11 @@ const containerStyle = {
   height: '100vh'
 };
 
+
 type MapProps = {
   location: string;
   setLocation: (location: string) => void;
+
 };
 
 // const center = {
