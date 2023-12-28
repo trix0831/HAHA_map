@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { z } from "zod";
-// import { eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { activitiesTable, usersToActivitiesTable } from "@/db/schema";
@@ -64,63 +64,63 @@ export async function POST(request: NextRequest) {
 }
 
 
-// Define a schema for activity update request
-// const updateActivityRequestSchema = z.object({
-//   activityId: z.string().uuid(), // Ensure that the activityId is a valid UUID
-//   title: z.string().min(1).max(30).optional(),
-//   description: z.string().min(10).max(300).optional(),
-//   dateStart: z.string().optional(),
-//   dateEnd: z.string().optional(),
-// });
+// Define the schema for the activity update request
+const updateActivityRequestSchema = z.object({
+  title: z.string().min(1).max(30).optional(),
+  description: z.string().min(10).max(300).optional(),
+  dateStart: z.string().optional(),
+  dateEnd: z.string().optional(),
+  location: z.string().optional(),
+  schedule_name: z.array(z.string()).optional(),
+  schedule_location: z.array(z.string()).optional(),
+});
 
-// // Infer the TypeScript type from the zod schema
-// type UpdateActivityRequest = z.infer<typeof updateActivityRequestSchema>;
+// Infer the TypeScript type from the zod schema
+type UpdateActivityRequest = z.infer<typeof updateActivityRequestSchema>;
 
-// // PUT method to handle updating an activity's details
-// export async function PUT(request: NextRequest) {
-//   const data = await request.json();
+export async function PUT(
+  request: NextRequest,
+  {params}:{params:{activityId: string}},
+  ) {
+  const data = await request.json();
 
-//   // Validate the incoming request data
-//   let validatedData: UpdateActivityRequest;
-//   try {
-//     validatedData = updateActivityRequestSchema.parse(data);
-//   } catch (error) {
-//     if (error instanceof z.ZodError) {
-//       return NextResponse.json({ errors: error.errors }, { status: 400 });
-//     }
-//     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
-//   }
+  // Validate the incoming request data
 
-//   const { activityId, title, description, dateStart, dateEnd } = validatedData;
+  try {
+    updateActivityRequestSchema.parse(data);
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
 
-//   // Perform the update in the database
-//   try {
-//     const updateData: {title: string|null, description: string|null, dateStart: string|null, dateEnd: string|null} = {title: null, description: null, dateStart: null, dateEnd: null};
-//     if (title) updateData.title = title;
-//     if (description) updateData.description = description;
-//     if (dateStart) updateData.dateStart = dateStart;
-//     if (dateEnd) updateData.dateEnd = dateEnd;
+  // Destructure the validated data
+  const { title, description, dateStart, dateEnd, location, schedule_name, schedule_location } = data as UpdateActivityRequest;
 
-//     const updatedActivity = await db
-//       .update(activitiesTable)
-//       .set(updateData)
-//       .where(eq(activitiesTable.displayId,activityId))
-//       .returning()
-//       .execute();
+  // Construct the update payload, excluding undefined values
+  const updatePayload: Partial<UpdateActivityRequest> = {};
+  if (title !== undefined) updatePayload.title = title;
+  if (description !== undefined) updatePayload.description = description;
+  if (dateStart !== undefined) updatePayload.dateStart = dateStart;
+  if (dateEnd !== undefined) updatePayload.dateEnd = dateEnd;
+  if (location !== undefined) updatePayload.location = location;
+  if (schedule_name !== undefined) updatePayload.schedule_name = schedule_name;
+  if (schedule_location !== undefined) updatePayload.schedule_location = schedule_location;
 
-//     if (!updatedActivity) {
-//       return NextResponse.json(
-//         { error: "Activity not found or no changes were made." },
-//         { status: 404 },
-//       );
-//     }
+  // Perform the update in the database
+  try {
+    const updatedActivity = await db
+      .update(activitiesTable)
+      .set(updatePayload)
+      .where(eq(activitiesTable.displayId,params.activityId))
+      .returning()
 
-//     return NextResponse.json({ message: "Activity updated successfully" }, { status: 200 });
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json(
-//       { error: "Failed to update activity" },
-//       { status: 500 },
-//     );
-//   }
-// }
+    // Check if the activity was successfully updated
+    if (updatedActivity.length === 0) {
+      return NextResponse.json({ error: "Activity not found or no updates provided" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Activity updated successfully", activity: updatedActivity[0] }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to update activity" }, { status: 500 });
+  }
+}
