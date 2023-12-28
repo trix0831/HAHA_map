@@ -46,56 +46,17 @@ function AllPage({activity, members}: inputType) {
   // };
 
   return (
-
     <>
-      <div className="w-full flex">
-        <nav className="sticky top-0 flex w-full justify-between p-2 shadow-sm ml-2">
-          {/* <input
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            placeholder="Document Title"
-            className="rounded-lg h-10 px-2 py-1 text-slate-700 outline-0 focus:bg-slate-100 text-2xl"
-          /> */}
-          <p>{activity?.title}</p>
-        </nav>
-
-        {/* <section className="w-full px-4 py-4">
-          <textarea
-            value={content || ""}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-            className="h-[80vh] w-full outline-0 "
-          />
-        </section> */}
-
-
-        
-      </div>
-
-
       <div className="container mx-auto">
-
-        <div className="flex relative">
+        <div className="flex flex-col justify-center">
           <div style={{height: "70vh"}} className="w-1/2">
             {/* <Map zoom={7} center={position}></Map> */}
             <MapComponent
               location={location}
               setLoca={setLoca}
             />
+
           </div>
-
-          {/* <div className="w-1/2 flex justify-center mt-6">
-            <h1 className="text-5xl">title</h1>
-          </div> */}
-
-
-        </div>
-
-        <div className="overflow-auto h-screen">
-    
         </div>
       </div>
     </>
