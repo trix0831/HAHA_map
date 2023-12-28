@@ -54,10 +54,9 @@ function AllPage({activity, members}: inputType) {
   return (
     <>
       <div className="container mx-auto">
-        <div className="grid grid-cols-7">
-          <div className="flex flex-col justify-center col-span-6">
+        <div className="grid grid-cols-5">
+          <div className="flex flex-col justify-center col-span-3">
             <div style={{height: "70vh"}} className="w-1/2">
-              {/* <Map zoom={7} center={position}></Map> */}
               <p className="text-2xl font-bold py-3">{activity?.title}</p>
               <MapComponent
                 location={location}
@@ -67,32 +66,25 @@ function AllPage({activity, members}: inputType) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-start mt-16 col-span-1">
+          <div className="flex flex-col justify-start mt-16 col-span-2">
             <Button 
-              className={`fixed right-20 mr-14 top-3 z-50 w-fit  ${participateState === 'participate' ? 'bg-white' : 'bg-green-500 text-white'}`}
+              className={`fixed right-20 mr-14 top-3 z-50 w-fit  ${participateState === 'participate' ? 'bg-white' : 'bg-green-500 text-white'} hover:text-blue-500`}
               variant="outlined"
               onClick={toggleParticipate} 
               >
                 {participateState}
             </Button>
 
-            <p className="ml-5 font-semibold text-xl">Schedule</p>
-
-            {/* <Button 
-              className={`fixed right-10 top-14 z-50 w-fit `}
-              variant="outlined"
-              onClick={toggleParticipate} 
-              >
-              Add Schedule
-            </Button> */}
-            
-            <AddScheduleDialog 
-              setName={setSchName}
-              setSchLoca={setSchLoca}
-              location={location}
-              save={save}
-              schLoca={scheduleLocation}
-            />
+            <div className="flex justify-between">
+              <p className="ml-5 font-semibold text-xl">Schedule</p>
+              <AddScheduleDialog 
+                setName={setSchName}
+                setSchLoca={setSchLoca}
+                location={location}
+                save={save}
+                schLoca={scheduleLocation}
+              />
+            </div>
             
             <ScheduleList activity={activity} />
           </div>

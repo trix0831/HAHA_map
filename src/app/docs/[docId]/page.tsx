@@ -27,16 +27,6 @@ async function DocPage({params}: Props) {
   }
 
   const temp = {activity: activity, members: members};
-  
-  // const [participateState, setParticipateState] = useState("participate");
-
-  //define a function that alert("clicked")
-  // const a = () => {
-  //   if(participateState === "participate")
-  //     setParticipateState("participated");
-  //   else
-  //     setParticipateState("participate");
-  // };
 
   return (
 

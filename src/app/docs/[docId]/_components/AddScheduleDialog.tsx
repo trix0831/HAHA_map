@@ -44,13 +44,16 @@ function AddScheduleDialog({setName, setSchLoca, location, save, schLoca}: Props
     // alert(schLoca);
     // alert("I'm gonna save!!1");
     
-    // save();
+    save();
+    save();
+    save();
+    save();
 };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="mr-2" variant={"outlined"}>Add Schedule</Button>
+        <Button className="mr-2 text-sm" variant={"outlined"} sx={{ whiteSpace: 'nowrap', width: '120px' }}>Add Schedule</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

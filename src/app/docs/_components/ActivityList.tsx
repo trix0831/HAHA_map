@@ -5,20 +5,6 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import {useList} from "@/hooks/useList";
 
-// type docType = {
-//     id: number;
-//     userId: string;
-//     documentId: string;
-//     document: {
-//         displayId: string;
-//         title: string;
-//     };
-//   }
-  
-// type ActivityListProps = {
-//     documents : docType[],
-// }
-
 type activityType = {
   displayId: string;
   title: string;
@@ -31,6 +17,7 @@ type ActivityListProps = {
   
   
 export function ActivityList({allActivities, myActivities} : ActivityListProps){
+  
   const {setAll, setMy, allActivity} = useList();
   useEffect(() => {
     setAll(allActivities);
@@ -38,7 +25,7 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allActivities, myActivities])
 
-  const [mine, setMine] = useState<boolean>(false);
+  const [mine, setMine] = useState<boolean>(true);
   const [text, setText] = useState(''); 
 
   const myActivityIds = myActivities.map(doc => doc.displayId);
@@ -56,8 +43,7 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
 
             <button
               onClick={() => {setMine(!mine)}}
-              // className="flex w-full items-center mb-0 gap-2 px-3 text-left text-sm text-slate-500"
-              className="flex items-center absolute h-7 w-3/12 mt-3 px-3 text-left text-sm text-slate-500 hover:bg-slate-200"
+              className={`flex items-center absolute h-7 w-3/12 mt-3 px-3 text-left text-sm text-slate-500 hover:bg-slate-200 ${mine ? 'bg-slate-100' : 'bg-green-500'}`}
             >
               <svg width="22" height="22" className="mt-15" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" preserveAspectRatio="xMidYMid meet">
                   <path d="M116.46 3.96h-104c-4.42 0-8 3.58-8 8v104c0 4.42 3.58 8 8 8h104c4.42 0 8-3.58 8-8v-104c0-4.42-3.58-8-8-8z" fill="#689f38"></path>
@@ -67,8 +53,6 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
               </svg>
               <p className="ml-3">Only show my activities</p> 
             </button>
-            
-            {/* searchbar */} 
 
               <div className="absolute w-3/12 h-11 mt-24 py-1 bg-slate-100 bg-opacity-100"/>
               
@@ -77,7 +61,7 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
                 value={text}
                 onChange={(e) => {setText(e.target.value)}}
                 className="absolute w-1/5 pl-10 mt-24 ml-2 py-1 bg-gray-300 border rounded-xl hover:bg-gray-200 opacity-100"
-                />      
+                />
 
               <svg width="24" height="24" className="absolute mt-24 ml-5" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1003.8 775.3l-639.5 1.8L682.7 355z" fill="#B6CDEF" />
@@ -96,12 +80,11 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
       <section className="flex w-full flex-col pt-3 mt-16">
       {allActivity.map((doc, i) => {
           if (doc.title.includes(text)) {
-            
             if (mine)
               {return (
                 <div
                   key={i}
-                  className="group flex w-full cursor-pointer items-center justify-between gap-2 text-slate-400 hover:bg-slate-200 "
+                  className={`group flex w-full cursor-pointer items-center justify-between gap-2 text-slate-400 hover:bg-slate-200 ${mine ? 'bg-slate-100' : 'bg-green-500'}`}
                 >
                   <Link
                     className="grow px-3 py-1"

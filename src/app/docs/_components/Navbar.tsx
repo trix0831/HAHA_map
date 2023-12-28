@@ -48,9 +48,7 @@ async function Navbar() {
         </div>
         <CreateDialog/>
       </nav>
-      {/* <section className="flex w-full flex-col pt-3"> */}
         <ActivityList allActivities={allActivities} myActivities={myActivities}/>
-      {/* </section> */}
     </nav>
   );
 }
