@@ -22,6 +22,8 @@ export async function POST(
   // Validate the incoming request data
   let validatedData: AddUserToActivityRequest;
   try {
+
+    // eslint-disable-next-line
     validatedData = addUserToActivityRequestSchema.parse(data);
   } catch (error) {
     if (error instanceof z.ZodError) {
