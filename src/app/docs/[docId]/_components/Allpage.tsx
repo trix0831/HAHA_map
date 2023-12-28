@@ -1,5 +1,4 @@
 "use client"
-// import { InputAdornmentTypeMap } from "@mui/material";
 import MapComponent from "./map";
 import type { Activity } from "@/lib/types/db";
 import { useEffect } from "react";
@@ -7,6 +6,7 @@ import { useActivity } from "@/hooks/useActivity";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import ScheduleList from "./ScheduleList";
+import AddScheduleDialog from "./AddScheduleDialog";
 
 type memberType = {
   displayId: string;
@@ -20,7 +20,7 @@ type inputType = {
 }
 
 function AllPage({activity, members}: inputType) {
-  const {location, setDes, setLoca, save, setDateE, setDateS, setMem, setSchLoca, setSchName} = useActivity();
+  const {location, setDes, setLoca, save, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation} = useActivity();
   useEffect(() => {
     console.log("useEffect");
     console.log(activity);
@@ -35,7 +35,6 @@ function AllPage({activity, members}: inputType) {
     }
     setMem(members);
 
-    console.log(location);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity, members]);
 
@@ -48,6 +47,9 @@ function AllPage({activity, members}: inputType) {
     else
       setParticipateState("participate");
   };
+  console.log("Location");
+  console.log(location);
+  const forSchInput = {setName:setSchName, setSchLoca:setSchLoca, location:location, save:save, schLoca:scheduleLocation};
 
   return (
     <>
@@ -60,6 +62,7 @@ function AllPage({activity, members}: inputType) {
               <MapComponent
                 location={location}
                 setLoca={setLoca}
+                saveLoca={save}
               />
             </div>
           </div>
@@ -75,14 +78,21 @@ function AllPage({activity, members}: inputType) {
 
             <p className="ml-5 font-semibold text-xl">Schedule</p>
 
-            <Button 
+            {/* <Button 
               className={`fixed right-10 top-14 z-50 w-fit `}
               variant="outlined"
               onClick={toggleParticipate} 
               >
               Add Schedule
-            </Button>
-
+            </Button> */}
+            
+            <AddScheduleDialog 
+              setName={setSchName}
+              setSchLoca={setSchLoca}
+              location={location}
+              save={save}
+              schLoca={scheduleLocation}
+            />
             
             <ScheduleList activity={activity} />
           </div>
