@@ -4,38 +4,49 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import PlaceIcon from '@mui/icons-material/Place';
+import type { Activity } from "@/lib/types/db";
 
-function ScheduleList() {
+type ScheduleListProps = {
+  activity: Activity | undefined;
+}
+
+function ScheduleList({activity}: ScheduleListProps) {
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.blue' }} className='mt-10'>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
+    <>
+    {/* absolute right-6 top-24 */}
+      <List sx={{ width: '100%', maxWidth: 360}} >
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <PlaceIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="nam1" secondary="loca1"/>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <PlaceIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="nam1" secondary="loca1"/>
+          </ListItem>
+      </List>
+
+        {activity && activity.schedule_location.map((act, index) =>
+        (<List className='absolute right-6 top-16 bg-blue-300 w-3/12'>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <PlaceIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={activity.schedule_name[index]} secondary={act} />
+          </ListItem>
+        </List>)
+        )}
+    </>
   );
 }
 
