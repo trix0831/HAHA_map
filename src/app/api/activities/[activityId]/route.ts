@@ -109,6 +109,7 @@ export async function POST(request: NextRequest) {
         organizer_id: organizerId,
         schedule_name: [],
         schedule_location: [],
+        location: "23.97555-120.97361"
       })
       .returning());
     await db.insert(usersToActivitiesTable).values({
