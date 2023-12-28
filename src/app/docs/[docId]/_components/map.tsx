@@ -12,14 +12,14 @@ const containerStyle = {
 type MapProps = {
   location: string;
   setLoca: (location: string) => void;
-
+  saveLoca: () => void;
 };
 
 // const center = {
 //   lat: 23.97555, lng: 120.97361
 // };
 
-function MapComponent({ location, setLoca }: MapProps) {
+function MapComponent({ location, setLoca, saveLoca }: MapProps) {
   const { isLoaded } = useJsApiLoader({
     id: 'dfb0ed321bfd06d3',
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"
@@ -64,6 +64,7 @@ function MapComponent({ location, setLoca }: MapProps) {
   // }
 
   return isLoaded ? (
+    <>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -77,6 +78,13 @@ function MapComponent({ location, setLoca }: MapProps) {
           onDragEnd={MarkerFinishDrag}
         />
       </GoogleMap>
+      <button
+        onClick={() => {
+          saveLoca();
+        }}
+        className='bg-black text-white py-2 px-4 rounded shadow-md hover:bg-gray-700'
+      >save as default</button>
+    </>
   ) : <></>
 }
 
