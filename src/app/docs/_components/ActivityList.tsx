@@ -70,16 +70,16 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
             
             {/* searchbar */} 
 
-              <div className="absolute w-3/12 h-11 mt-20 py-1 bg-slate-100 bg-opacity-100"/>
+              <div className="absolute w-3/12 h-11 mt-24 py-1 bg-slate-100 bg-opacity-100"/>
               
               <Input
                 placeholder="search activity ..."
                 value={text}
                 onChange={(e) => {setText(e.target.value)}}
-                className="absolute w-1/5 pl-10 mt-20 ml-2 py-1 bg-gray-300 border rounded-xl hover:bg-gray-200 opacity-100"
+                className="absolute w-1/5 pl-10 mt-24 ml-2 py-1 bg-gray-300 border rounded-xl hover:bg-gray-200 opacity-100"
                 />      
 
-              <svg width="24" height="24" className="absolute mt-20 ml-5" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <svg width="24" height="24" className="absolute mt-24 ml-5" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1003.8 775.3l-639.5 1.8L682.7 355z" fill="#B6CDEF" />
                   <path d="M364.3 792.1c-5.7 0-10.9-3.2-13.4-8.3-2.5-5.1-2-11.2 1.4-15.7L670.7 346c2.8-3.7 7.2-6 11.9-6s9.1 2.2 11.9 5.9l321.1 420.4c3.5 4.5 4.1 10.6 1.5 15.7-2.5 5.1-7.7 8.4-13.4 8.4l-639.4 1.7c0.1 0 0.1 0 0 0z m318.5-412.3L394.5 762l579-1.6-290.7-380.6z" fill="#0F53A8" />
                   <path d="M1003.8 775.3l-152.1 0.5-169-420.8z" fill="#89B7F5" />
@@ -93,7 +93,7 @@ export function ActivityList({allActivities, myActivities} : ActivityListProps){
           </section>
 
 
-      <section className="flex w-full flex-col pt-3 mt-15">
+      <section className="flex w-full flex-col pt-3 mt-16">
       {allActivity.map((doc, i) => {
           if (doc.title.includes(text)) {
             
