@@ -17,11 +17,11 @@ type inputType = {
 }
 
 function AllPage({activity, members}: inputType) {
-  const {setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName} = useActivity();
+  const {location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName} = useActivity();
   useEffect(() => {
-    // console.log("useEffect");
-    // console.log(activity);
-    // console.log("end");
+    console.log("useEffect");
+    console.log(activity);
+    console.log("end");
     if(activity){
       setDes(activity.description);
       setLoca(activity.location);
@@ -50,8 +50,12 @@ function AllPage({activity, members}: inputType) {
       <div className="container mx-auto">
         <div className="flex flex-col justify-center">
           <div style={{height: "70vh"}} className="w-1/2">
-            <p className="h-10 text-2xl font-semibold mt-3">{activity?.title}</p>
-            <MapComponent/>
+            {/* <Map zoom={7} center={position}></Map> */}
+            <MapComponent
+              location={location}
+              setLoca={setLoca}
+            />
+
           </div>
         </div>
       </div>
