@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@mui/material";
 import Link from "next/link";
 import {useList} from "@/hooks/useList";
 
@@ -32,7 +31,7 @@ type ActivityListProps = {
   
   
 export function ActivityList({allActivities, myActivities} : ActivityListProps){
-  const {setAll, setMy, allActivity, myActivity} = useList();
+  const {setAll, setMy, allActivity} = useList();
   useEffect(() => {
     setAll(allActivities);
     setMy(myActivities);
