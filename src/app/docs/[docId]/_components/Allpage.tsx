@@ -17,7 +17,7 @@ type inputType = {
 }
 
 function AllPage({activity, members}: inputType) {
-  const {location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName} = useActivity();
+  const {location, setDes, setLoca, saveLoca, setDateE, setDateS, setMem, setSchLoca, setSchName} = useActivity();
   useEffect(() => {
     console.log("useEffect");
     console.log(activity);
@@ -54,6 +54,7 @@ function AllPage({activity, members}: inputType) {
             <MapComponent
               location={location}
               setLoca={setLoca}
+              saveLoca = {saveLoca}
             />
 
           </div>
