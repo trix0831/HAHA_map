@@ -107,6 +107,8 @@ export async function POST(request: NextRequest) {
         dateStart,
         dateEnd,
         organizer_id: organizerId,
+        schedule_name: [],
+        schedule_location: [],
       })
       .returning());
     await db.insert(usersToActivitiesTable).values({
