@@ -3,7 +3,7 @@ import { useState } from "react";
 
 type memberType = {
   displayId: string;
-  name: string;
+  userName: string;
   email: string;
 }
 
