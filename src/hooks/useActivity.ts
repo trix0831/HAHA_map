@@ -3,7 +3,7 @@ import { useState } from "react";
 
 type memberType = {
   displayId: string;
-  userName: string;
+  username: string;
   email: string;
 }
 
@@ -12,7 +12,7 @@ export const useActivity = () => {
   const activityId = Array.isArray(docId) ? docId[0] : docId;
 
   const [description, setDescription] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
+  const [location, setLocation] = useState<string|null>(null);
   const [members, setMembers] = useState<memberType[]>([]);
   const [dateStart, setDateStart] = useState<string>("");
   const [dateEnd, setDateEnd] = useState<string>("");
@@ -67,13 +67,17 @@ export const useActivity = () => {
     editActivity();
   }
 
-  const setLoca = (lo: string) => {
+  const setLoca = (lo: string|null) => {
     setLocation(lo);
     editActivity();
   }
 
-  const setMem = (userId: string) => {
+  const addMem = (userId: string) => {
     editMembers(userId);
+  }
+
+  const setMem = (mem: memberType[]) => {
+    setMembers(mem);
   }
 
   const setDateS = (s: string) => {
@@ -101,6 +105,7 @@ return{
   setDes,
   setLoca,
   setMem,
+  addMem,
   setDateS, 
   setDateE,
   setSchName,
@@ -113,5 +118,4 @@ return{
   scheduleName,
   scheduleLocation,
 }
-
 }

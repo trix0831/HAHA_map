@@ -51,8 +51,8 @@ export const activitiesTable = pgTable(
     location: text("location"),
     dateStart: text('date_end').notNull(),
     dateEnd: text("date_start").notNull(),
-    schedule_name: text("schedule_name").array(),
-    schedule_location: text("schedule_location").array(),
+    schedule_name: text("schedule_name").array().notNull(),
+    schedule_location: text("schedule_location").array().notNull(),
   },
   (table) => ({
     displayIdIndex: index("display_id_index").on(table.displayId),

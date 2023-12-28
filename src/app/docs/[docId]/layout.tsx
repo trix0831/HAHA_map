@@ -9,6 +9,8 @@ type Props = {
 };
 
 function DocEditorLayout({ children,params }: Props) {
+  
+
   return (
     <>
         <div className="fixed right-4 top-3 z-50">
