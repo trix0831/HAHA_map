@@ -4,8 +4,8 @@ import React from 'react'
 import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '40vw',
-  height: '100vh'
+  width: '35vw',
+  height: '90vh'
 };
 
 
