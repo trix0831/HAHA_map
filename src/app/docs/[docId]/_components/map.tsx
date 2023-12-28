@@ -11,7 +11,7 @@ const containerStyle = {
 
 type MapProps = {
   location: string;
-  setLocation: (location: string) => void;
+  setLoca: (location: string) => void;
 
 };
 
@@ -19,12 +19,12 @@ type MapProps = {
 //   lat: 23.97555, lng: 120.97361
 // };
 
-function MapComponent({ location, setLocation }: MapProps) {
+function MapComponent({ location, setLoca }: MapProps) {
   const { isLoaded } = useJsApiLoader({
     id: 'dfb0ed321bfd06d3',
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"
   })
-  const latlngArr = location.split("/").map(Number);
+  const latlngArr = location.split("-").map(Number);
   const center = {lat: latlngArr[0], lng: latlngArr[1]};
   
   // const center = {
@@ -33,6 +33,7 @@ function MapComponent({ location, setLocation }: MapProps) {
 
 
 
+// eslint-disable-next-line
   const [map, setMap] = React.useState(null)
   // console.log(map);
 
@@ -44,6 +45,7 @@ function MapComponent({ location, setLocation }: MapProps) {
     setMap(map)
   }, [])
 
+// eslint-disable-next-line
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
     // console.log(map);
@@ -54,7 +56,7 @@ function MapComponent({ location, setLocation }: MapProps) {
     console.log(coordArray);
     // console.log(event.latLng.lat());
     // console.log(event.latLng.lng());
-    setLocation(coordArray.join("/"));
+    setLoca(coordArray.join("-"));
   }
 
   // function MarkerClicked(event){
