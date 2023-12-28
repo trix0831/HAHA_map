@@ -8,6 +8,10 @@ const containerStyle = {
   height: '100vh'
 };
 
+type MapProps = {
+  location: string;
+}
+
 const center = {
   lat: 23.97555, lng: 120.97361
 };
@@ -37,13 +41,13 @@ function MapComponent() {
   }, [])
 
   function MarkerFinishDrag(event){
-    console.log(event.latLng.lat);
-    // console.log(event.latlng.lng());
+    console.log(event.latLng.lat());
+    console.log(event.latLng.lng());
   }
 
-  function MarkerClicked(event){
-    console.log(event);
-  }
+  // function MarkerClicked(event){
+  //   console.log(event);
+  // }
 
   return isLoaded ? (
       <GoogleMap
@@ -56,7 +60,6 @@ function MapComponent() {
         <MarkerF
           position={{lat: 23.97555, lng: 120.97361}}
           draggable={true}
-          onClick={MarkerClicked}
           onDragEnd={MarkerFinishDrag}
         />
       </GoogleMap>
