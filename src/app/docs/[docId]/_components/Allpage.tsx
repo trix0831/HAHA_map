@@ -110,7 +110,10 @@ function AllPage({activity, members}: inputType) {
               />
             </div>
             
-            <ScheduleList activity={activity} />
+            <ScheduleList 
+              name = {scheduleName}
+              location = {scheduleLocation}
+            />
           </div>
         </div>
       </div>
