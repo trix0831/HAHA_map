@@ -10,7 +10,11 @@ import CreateDialog from "./CreateDialog";
 
 import ActivityList from "./ActivityList";
 
-async function Navbar() {
+type Props = {
+  activityID: string;
+}
+
+async function Navbar({activityID}: Props) {
   const session = await auth();
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
@@ -48,7 +52,11 @@ async function Navbar() {
         </div>
         <CreateDialog/>
       </nav>
-        <ActivityList allActivities={allActivities} myActivities={myActivities}/>
+        <ActivityList 
+          allActivities={allActivities} 
+          myActivities={myActivities}
+          activityID={activityID}
+        />
     </nav>
   );
 }

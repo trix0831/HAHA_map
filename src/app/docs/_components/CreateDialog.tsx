@@ -43,6 +43,10 @@ async function CreateDialog() {
         <DialogHeader>
           <DialogTitle>Create a new activity!</DialogTitle>
         </DialogHeader>
+        <DialogDescription>
+          All fields are required.<br/>
+          Start date have to be earlier than end, or activity will not be created.
+        </DialogDescription>
         <form
           action={async (e) => {
             "use server";
@@ -58,6 +62,12 @@ async function CreateDialog() {
             
             const dateEnd = e.get("dateEnd")?.toString();
             if (!dateEnd) return;
+
+            if (new Date(dateStart) >= new Date(dateEnd)) {
+              // Display an error message or handle the validation failure
+              console.log("Start date must be earlier than the end date");
+              return;
+            }
 
             const createData={title:title, description:description, dateStart:dateStart, dateEnd:dateEnd, organizerId:userId}
 
