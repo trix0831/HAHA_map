@@ -2,10 +2,12 @@
 
 import React from 'react'
 import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
+import { Button } from '@mui/material';
+
 
 const containerStyle = {
   width: '35vw',
-  height: '90vh'
+  height: '80vh'
 };
 
 
@@ -83,12 +85,16 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
           onDragEnd={MarkerFinishDrag}
         />
       </GoogleMap>
-      <button
+
+      <Button
         onClick={() => {
           handleClick();
         }}
-        className='bg-black text-white py-2 px-4 rounded shadow-md hover:bg-gray-700'
-      >save as default</button>
+        variant="outlined"
+        className='mt-2'
+      >
+        save as default
+      </Button>
     </>
   ) : <></>
 }
