@@ -16,7 +16,7 @@ export const useActivity = () => {
   const router = useRouter();
   const [description, setDescription] = useState<string>("a");
   const [location, setLocation] = useState<string>("");
-  const [members, setMembers] = useState<memberType[]>([]);
+  const [membersState, setMembers] = useState<memberType[]>([]);
   const [dateStart, setDateStart] = useState<string>("");
   const [dateEnd, setDateEnd] = useState<string>("");
   const [scheduleName, setScheduleName] = useState<string[]>([]);
@@ -156,7 +156,7 @@ return{
   updateLocation,
   description,
   location,
-  members,
+  membersState,
   dateStart,
   dateEnd,
   scheduleName,

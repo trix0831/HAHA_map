@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import ScheduleList from "./ScheduleList";
 import AddScheduleDialog from "./AddScheduleDialog";
+import ShareDialog from "./ShareDialog";
 
 type memberType = {
   displayId: string;
@@ -24,7 +25,7 @@ function AllPage({activity, members}: inputType) {
   const { docId } = useParams();
   const activityId = Array.isArray(docId) ? docId[0] : docId;
   const router = useRouter();
-  const {updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName} = useActivity();
+  const {membersState, updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName} = useActivity();
   useEffect(() => {
     console.log("useEffect");
     console.log(activity);
@@ -38,13 +39,16 @@ function AllPage({activity, members}: inputType) {
       setSchName(activity.schedule_name);
     }
     setMem(members);
+    // console.log("MEMBER!!!")
+    // console.log(members);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity, members]);
 
   
   const [participateState, setParticipateState] = useState("participate");
-
+  console.log("allPageMember");
+  console.log(membersState);
   const toggleParticipate = () => {
     if(participateState === "participate")
       setParticipateState("participated");
@@ -88,6 +92,11 @@ function AllPage({activity, members}: inputType) {
               >
                 {participateState}
             </Button>
+
+            <ShareDialog 
+            membersState={membersState}
+            docId={activityId} 
+          />
 
             <div className="flex justify-between">
               <p className="ml-5 font-semibold text-xl">Schedule</p>
