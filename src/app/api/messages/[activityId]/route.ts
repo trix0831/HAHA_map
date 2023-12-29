@@ -124,8 +124,8 @@ export async function PUT(
       .where(eq(activitiesTable.displayId, params.activityId))
       .returning();
 
-    console.log("here2");
-    console.log(updatedDoc);
+    // console.log("here2");
+    // console.log(updatedDoc);
 
     // Trigger pusher event
     const pusher = new Pusher({
@@ -138,6 +138,7 @@ export async function PUT(
 
     // Private channels are in the format: private-...
     await pusher.trigger(`private-${updatedDoc.displayId}`, "doc:update", {
+    // await pusher.trigger(`private-haha`, "doc:update", {
       senderId: userId,
       messages: {
         displayId: updatedDoc.displayId,

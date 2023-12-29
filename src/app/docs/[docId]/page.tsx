@@ -3,6 +3,7 @@ import { getActivityMembers, getActivityDetial } from "./_components/actions";
 import type { Activity_detial } from "@/lib/types/db";
 // import type { NextRequest } from 'next/server';
 import AllPage from "./_components/Allpage";
+// import { auth } from "@/lib/auth";
 
 type memberType = {
   displayId: string;
