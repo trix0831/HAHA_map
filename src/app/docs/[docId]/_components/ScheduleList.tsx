@@ -38,7 +38,7 @@ function ScheduleList({name, location}: ScheduleListProps) {
       <List>
         {location.map((act, index) =>
           (
-            <ListItem sx={{ height: '40px', borderRadius : '8px'}} className='flex hover:bg-slate-200 mb-3'>
+            <ListItem key = {index} sx={{ height: '40px', borderRadius : '8px'}} className='flex hover:bg-slate-200 mb-3'>
               <ListItemAvatar>
                 <Avatar>
                   <PlaceIcon />

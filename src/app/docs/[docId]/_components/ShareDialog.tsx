@@ -10,10 +10,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-
-import { useActivity } from "@/hooks/useActivity";
+// import { useActivity } from "@/hooks/useActivity";
 import type { memberType } from "@/lib/types/db";
-import { useRef } from "react";
+// import { useRef } from "react";
 
 type Props = {
   docId: string;
@@ -23,19 +22,19 @@ type Props = {
 
 function ShareDialog({ membersState }: Props) {
 
-  const {setMem, addMem} = useActivity();
-  const friendNameRef = useRef<HTMLInputElement>(null);
+  // const {setMem, addMem} = useActivity();
+  // const friendNameRef = useRef<HTMLInputElement>(null);
 
-  async function handleSubmit(){
-    const friendName = friendNameRef.current?.value;
+  // async function handleSubmit(){
+  //   const friendName = friendNameRef.current?.value;
 
     
 
-    // if(friendName){
-    //   const newMember = await addMem(docId);
-    //   setMem([...membersState, newMember]);
-    // }
-  }
+  //   // if(friendName){
+  //   //   const newMember = await addMem(docId);
+  //   //   setMem([...membersState, newMember]);
+  //   // }
+  // }
 
 
   return (
