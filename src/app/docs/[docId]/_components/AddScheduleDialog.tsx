@@ -16,21 +16,23 @@ type Props = {
     setName: (name) => void;
     setSchLoca:(lo:string[]) => void;
     location: string;
-    save: () => void;
+    save: (name:string[], location:string[]) => Promise<void>;
     schLoca: string[];
+    schName: string[];
 };
 
-function AddScheduleDialog({setName, setSchLoca, location, save, schLoca}: Props) {
+function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schName}: Props) {
   const nameInputRef = useRef<HTMLInputElement>(null);
 
   async function handleSave (){
     const name = nameInputRef.current?.value;
     const nameStr = name?.toString();
 
+    let b:string[] = [];
     if(name !== undefined){
         await setName((prev:string[]) => [...prev, nameStr]);
+        b = [...schName, nameStr!];
         // alert(nameStr);
-        save();
     }
     
     if(location !== undefined){
@@ -38,16 +40,14 @@ function AddScheduleDialog({setName, setSchLoca, location, save, schLoca}: Props
         // alert([...schLoca, location]);
         // setSchLoca((prev:string[]) => [...prev, location]);
         await setSchLoca([...schLoca, location])
-        save();
         // alert(location);
     }
+    const a = [...schLoca, location];
+    
     // alert(schLoca);
     // alert("I'm gonna save!!1");
     
-    save();
-    save();
-    save();
-    save();
+    await save(b,a);
 };
 
   return (

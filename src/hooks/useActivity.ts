@@ -1,5 +1,8 @@
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+// import { Router } from "next/router";
+
 
 type memberType = {
   displayId: string;
@@ -10,7 +13,7 @@ type memberType = {
 export const useActivity = () => {
   const { docId } = useParams();
   const activityId = Array.isArray(docId) ? docId[0] : docId;
-
+  const router = useRouter();
   const [description, setDescription] = useState<string>("a");
   const [location, setLocation] = useState<string>("");
   const [members, setMembers] = useState<memberType[]>([]);
@@ -39,6 +42,40 @@ export const useActivity = () => {
       return;
     }
   }
+
+  const updateLocation = async(
+    location: string,
+  ) => {
+    const res = await fetch(`/api/activities/${activityId}`,{
+        method: "PUT",
+        body: JSON.stringify({
+          location: location,
+        }),
+    });
+    if (!res.ok){
+      const body = await res.json();
+      throw new Error(body.error);
+    }
+    router.refresh();
+  };
+
+  const postSchedule = async(
+    name: string[],
+    location: string[],
+  ) => {
+    const res = await fetch(`/api/activities/${activityId}`,{
+        method: "PUT",
+        body: JSON.stringify({
+          schedule_name: name,
+          schedule_location: location,
+        }),
+    });
+    if (!res.ok){
+      const body = await res.json();
+      throw new Error(body.error);
+    }
+    router.refresh();
+  };
 
   const editMembers =async (userId: string) => {
     const res = await fetch(`/api/members`, {
@@ -115,6 +152,8 @@ return{
   setDateE,
   setSchName,
   setSchLoca,
+  postSchedule,
+  updateLocation,
   description,
   location,
   members,

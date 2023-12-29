@@ -20,7 +20,7 @@ type inputType = {
 }
 
 function AllPage({activity, members}: inputType) {
-  const {location, setDes, setLoca, save, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation} = useActivity();
+  const {updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName} = useActivity();
   useEffect(() => {
     console.log("useEffect");
     console.log(activity);
@@ -49,7 +49,7 @@ function AllPage({activity, members}: inputType) {
   };
   console.log("Location");
   console.log(location);
-  const forSchInput = {setName:setSchName, setSchLoca:setSchLoca, location:location, save:save, schLoca:scheduleLocation};
+  // const forSchInput = {setName:setSchName, setSchLoca:setSchLoca, location:location, save:save, schLoca:scheduleLocation};
 
   return (
     <>
@@ -61,7 +61,7 @@ function AllPage({activity, members}: inputType) {
               <MapComponent
                 location={location}
                 setLoca={setLoca}
-                saveLoca={save}
+                saveLoca={updateLocation}
               />
             </div>
           </div>
@@ -81,8 +81,9 @@ function AllPage({activity, members}: inputType) {
                 setName={setSchName}
                 setSchLoca={setSchLoca}
                 location={location}
-                save={save}
+                save={postSchedule}
                 schLoca={scheduleLocation}
+                schName = {scheduleName}
               />
             </div>
             

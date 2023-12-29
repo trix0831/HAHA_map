@@ -12,7 +12,7 @@ const containerStyle = {
 type MapProps = {
   location: string;
   setLoca: (location: string) => void;
-  saveLoca: () => void;
+  saveLoca: (location: string) => Promise<void>;
 };
 
 // const center = {
@@ -51,6 +51,11 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
     // console.log(map);
   }, [])
 
+
+  async function handleClick(){
+    await saveLoca(location);
+  }
+
   function MarkerFinishDrag(event){
     const coordArray = [event.latLng.lat(), event.latLng.lng()]
     // console.log(coordArray);
@@ -80,7 +85,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
       </GoogleMap>
       <button
         onClick={() => {
-          saveLoca();
+          handleClick();
         }}
         className='bg-black text-white py-2 px-4 rounded shadow-md hover:bg-gray-700'
       >save as default</button>
