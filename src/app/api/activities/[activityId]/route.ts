@@ -19,67 +19,67 @@ const createActivityRequestSchema = z.object({
 // // you can use z.infer to get the typescript type from a zod schema
 type createActivityRequest = z.infer<typeof createActivityRequestSchema>;
  
-// export async function GET(
-//   request: NextRequest,
-//   {params}:{params:{activityId: string}},
-//   ){
-//     const url = new URL(request.url);
-//     const type = url.searchParams.get('type');
+export async function GET(
+  request: NextRequest,
+  {params}:{params:{activityId: string}},
+  ){
+    const url = new URL(request.url);
+    const type = url.searchParams.get('type');
 
-//     if (type === 'members'){
-//       const members_temp = await db.query.usersToActivitiesTable.findMany({
-//         where: eq(usersToActivitiesTable.userId, params.activityId),
-//         with: {
-//           user:{
-//             columns:{
-//               displayId: true,
-//               username: true,
-//               email: true,
-//             }
-//           }
-//         }
-//       })
-//       const members:{displayId:string, username:string, email:string}[] = [];
-//       for (let i = 0; i<members_temp.length; i++){
-//         members.push(members_temp[i].user);
-//       }
-//       return members;
-//     }else if (type === 'details'){
-//       try {
-//         const activityDetails = await db
-//           .select()
-//           .from(activitiesTable)
-//           .where(eq(activitiesTable.displayId,params.activityId))
-//           .execute()
-//         // If no activity is found, return a 404 response
-//         if (activityDetails.length === 0) {
-//           return new Response(JSON.stringify({ error: 'Activity not found' }), {
-//             status: 404,
-//             headers: {
-//               'Content-Type': 'application/json',
-//             },
-//           });
-//         }
+    if (type === 'members'){
+      const members_temp = await db.query.usersToActivitiesTable.findMany({
+        where: eq(usersToActivitiesTable.userId, params.activityId),
+        with: {
+          user:{
+            columns:{
+              displayId: true,
+              username: true,
+              email: true,
+            }
+          }
+        }
+      })
+      const members:{displayId:string, username:string, email:string}[] = [];
+      for (let i = 0; i<members_temp.length; i++){
+        members.push(members_temp[i].user);
+      }
+      return members;
+    }else if (type === 'details'){
+      try {
+        const activityDetails = await db
+          .select()
+          .from(activitiesTable)
+          .where(eq(activitiesTable.displayId,params.activityId))
+          .execute()
+        // If no activity is found, return a 404 response
+        if (activityDetails.length === 0) {
+          return new Response(JSON.stringify({ error: 'Activity not found' }), {
+            status: 404,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+        }
     
-//         // Return the activity details in the response
-//         return new Response(JSON.stringify(activityDetails[0]), {
-//           status: 200,
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//         });
-//       } catch (error) {
-//         // Handle any errors that occur during the database operation
-//         console.error(error);
-//         return new Response(JSON.stringify({ error: 'Failed to retrieve activity details' }), {
-//           status: 500,
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//         });
-//       }
-//     }
-// }
+        // Return the activity details in the response
+        return new Response(JSON.stringify(activityDetails[0]), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      } catch (error) {
+        // Handle any errors that occur during the database operation
+        console.error(error);
+        return new Response(JSON.stringify({ error: 'Failed to retrieve activity details' }), {
+          status: 500,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      }
+    }
+}
 
 export async function POST(request: NextRequest) {
   const data = await request.json();

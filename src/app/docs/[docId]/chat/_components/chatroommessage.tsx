@@ -2,20 +2,21 @@
 
 // import { redirect } from "next/navigation";
 // import React, { useEffect } from "react";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { AiFillDelete } from "react-icons/ai";
 import { useRef, useEffect } from "react";
 
 type inputType = {
+  user: string;
   content: string[];
   senderId: string[];
   senderName: string[];
   setContent: (content: string[], senderId: string[], senderName: string[]) => void;
 }
 
-function ChatRoomMessages({content, senderId, senderName, setContent}: inputType) {
-  const {data:session} = useSession();
-  const user = session?.user?.id;
+function ChatRoomMessages({user, content, senderId, senderName, setContent}: inputType) {
+  // const {data:session} = useSession();
+  // const user = session?.user?.id;
 
   const handleDelete = (index: number) => {
     console.log("delete");

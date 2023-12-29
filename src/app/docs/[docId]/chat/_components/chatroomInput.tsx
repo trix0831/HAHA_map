@@ -1,36 +1,45 @@
 "use client";
 
 // import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
+// import { useSession } from "next-auth/react";
+// import { auth } from "@/lib/auth";
 // import { usePathname } from "next/navigation";
 
 type inputType = {
+  user: string;
+  name: string;
   content: string[];
   senderName: string[];
   setContent: (content: string[], senderId: string[], senderName: string[])=>void;
   senderId: string[];
 }
 
-function ChatRoomInput({content, senderName, setContent, senderId }: inputType) {
+function ChatRoomInput({user, name, content, senderName, setContent, senderId }: inputType) {
   // const url = usePathname();
   // const docId = (url.split('/').pop())!;
-  const {data:session} = useSession();
-  const user = session?.user?.id;
+  // const {data:session} = useSession();
+  // const user = session?.user?.id;
   const [input, setInput] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  useEffect(() => {
-    const getUsername = async() => {
-        const res = await fetch(`/api/username/${user}`);
-        if (!res.ok) {
-            console.log("can't find user!!!");
-        return;
-        }
-        const temp = await res.json();
-        setName(temp.username);
-    }
-    getUsername();
-}, [user])
+  // const [name, setName] = useState<string>("");
+//   useEffect(() => {
+//     const getUsername = async() => {
+//       // const {data:session} = await auth();
+//       const session = await auth();
+//       const user = session?.user?.id;
+//       console.log("___________DOODODDODODODO");
+//       console.log(session);
+//       console.log(user);
+//         const res = await fetch(`/api/username/${user}`);
+//         if (!res.ok) {
+//             console.log("can't find user!!!");
+//         return;
+//         }
+//         const temp = await res.json();
+//         setName(temp.username);
+//     }
+//     getUsername();
+// }, [user])
 
 
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
