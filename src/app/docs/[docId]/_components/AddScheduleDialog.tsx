@@ -7,6 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import { useState, useRef } from 'react';
+
 type Props = {
     setName: (name) => void;
     setSchLoca:(lo:string[]) => void;
@@ -16,143 +18,83 @@ type Props = {
     schName: string[];
 };
 
-function AddScheduleDialog({}:Props) {
-  const [open, setOpen] = React.useState(false);
+function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schName}:Props) {
+  const [open, setOpen] = useState(false);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const [textFieldValue, setTextFieldValue] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCloseAndSave = () => {
     setOpen(false);
+    handleSave();
   };
+
+  async function handleSave (){
+    const name = textFieldValue;
+    const nameStr = name?.toString();
+
+    let b:string[] = [];
+
+    if(name !== undefined){
+        await setName((prev:string[]) => [...prev, nameStr]);
+        b = [...schName, nameStr];
+    }
+
+    if(location !== undefined){
+        await setSchLoca([...schLoca, location])
+    }
+
+    const a = [...schLoca, location];
+
+    await save(b,a);
+
+    setTextFieldValue('');
+  };
+
+
+  function handleCancel (){
+    setOpen(false);
+    setTextFieldValue('');
+  }
 
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        Add Schedule
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
+      <Dialog open={open} onClose={handleCancel}>
+        <DialogTitle>Add Schedule</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Give this location a name !
+            </DialogContentText>
 
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-          
-        </DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Location Name"
+              type="email"
+              fullWidth
+              variant="standard"
+              value={textFieldValue}
+              ref={nameInputRef}
+              onChange={(e) => setTextFieldValue(e.target.value)}
+            />
+            
+          </DialogContent>
+
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleCloseAndSave}>Add</Button>
         </DialogActions>
+      
       </Dialog>
     </React.Fragment>
   );
 }
 
 export default AddScheduleDialog;
-
-
-// import { useRef, useState } from "react";
-
-// import { Button } from "@mui/material";
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog";
-// import { Input } from "@/components/ui/input";
-
-
-// type Props = {
-//     setName: (name) => void;
-//     setSchLoca:(lo:string[]) => void;
-//     location: string;
-//     save: () => void;
-//     schLoca: string[];
-// };
-
-// function AddScheduleDialog({setName, setSchLoca, location, save, schLoca}: Props) {
-//   const nameInputRef = useRef<HTMLInputElement>(null);
-//   const [dialogOpen, setDialogOpen] = useState(false);
-
-//   async function handleSave (){
-//     toggleOpen();
-//     const name = nameInputRef.current?.value;
-//     const nameStr = name?.toString();
-
-//     if(name !== undefined){
-//         await setName((prev:string[]) => [...prev, nameStr]);
-//         // alert(nameStr);
-//         save();
-//     }
-    
-//     if(location !== undefined){
-//         // alert("location array");
-//         // alert([...schLoca, location]);
-//         // setSchLoca((prev:string[]) => [...prev, location]);
-//         await setSchLoca([...schLoca, location])
-//         save();
-//         // alert(location);
-//     }
-//     // alert(schLoca);
-//     // alert("I'm gonna save!!1");
-    
-//     save();
-//     save();
-//     save();
-//     save();
-// };
-
-//   function toggleOpen() {
-//     setDialogOpen((prev) => !prev);
-//   }
-
-//   return (
-//     <Dialog open={dialogOpen}>
-//       <DialogTrigger asChild>
-//         <Button 
-//           className="mr-2 text-sm" 
-//           variant={"outlined"} 
-//           sx={{ whiteSpace: 'nowrap', width: '120px' }}
-//           onClick={toggleOpen}
-//         >
-//           Add Schedule
-//         </Button>
-//       </DialogTrigger>
-
-//       <DialogContent>
-//         <DialogHeader>
-//           <DialogTitle>Add Schedule</DialogTitle>
-//           <DialogDescription>Give this location a name !</DialogDescription>
-//         </DialogHeader>
-
-//         <Input 
-//         placeholder="Give it a name !" 
-//         ref={nameInputRef} 
-//         />
-
-//         <Button
-//             onClick={handleSave}
-//         >
-//             Add
-//         </Button>
-//       </DialogContent>
-//     </Dialog>
-//   );
-// }
-
-// export default AddScheduleDialog;
