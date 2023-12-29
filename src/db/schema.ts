@@ -37,7 +37,6 @@ export const usersRelations = relations(usersTable, ({ many }) => ({
   usersToDocumentsTable: many(usersToDocumentsTable),
   usersToActivitiesTable: many(usersToActivitiesTable),
   activitiesTable: many(activitiesTable),
-  messagesTable: many(messagesTable),
 }));
 
 export const activitiesTable = pgTable(
@@ -53,6 +52,9 @@ export const activitiesTable = pgTable(
     dateEnd: text("date_start").notNull(),
     schedule_name: text("schedule_name").array().notNull(),
     schedule_location: text("schedule_location").array().notNull(),
+    messages_content: text("messages_content").array().notNull(),
+    messages_senderId: text("messages_senderId").array().notNull(),
+    messages_senderName: text("messages_senderName").array().notNull(),
   },
   (table) => ({
     displayIdIndex: index("display_id_index").on(table.displayId),
@@ -65,34 +67,33 @@ export const activitiesRelations = relations(activitiesTable, ({many, one}) => (
     fields: [activitiesTable.organizer_id],
     references: [usersTable.displayId],
   }),
-  messagesTable: many(messagesTable),
 }));
 
-export const messagesTable = pgTable(
-  "messages",
-  {
-    id: serial("id").primaryKey(),
-    displayId: uuid("display_id").defaultRandom().notNull().unique(),
-    content: text("content").notNull(),
-    time: text("time").notNull(),
-    senderId: uuid("sender_id"),
-    activityId: uuid("activity_id"),
-  },
-  (table) => ({
-    displayIdIndex: index("display_id_index").on(table.displayId),
-  })
-);
+// export const messagesTable = pgTable(
+//   "messages",
+//   {
+//     id: serial("id").primaryKey(),
+//     displayId: uuid("display_id").defaultRandom().notNull().unique(),
+//     content: text("content").notNull(),
+//     time: text("time").notNull(),
+//     senderId: uuid("sender_id"),
+//     activityId: uuid("activity_id"),
+//   },
+//   (table) => ({
+//     displayIdIndex: index("display_id_index").on(table.displayId),
+//   })
+// );
 
-export const messagesRelations = relations(messagesTable, ({one}) => ({
-  sender: one(usersTable, {
-    fields: [messagesTable.senderId],
-    references: [usersTable.displayId],
-  }),
-  activity: one(activitiesTable, {
-    fields: [messagesTable.activityId],
-    references: [activitiesTable.displayId],
-  })
-}))
+// export const messagesRelations = relations(messagesTable, ({one}) => ({
+//   sender: one(usersTable, {
+//     fields: [messagesTable.senderId],
+//     references: [usersTable.displayId],
+//   }),
+//   activity: one(activitiesTable, {
+//     fields: [messagesTable.activityId],
+//     references: [activitiesTable.displayId],
+//   })
+// }))
 
 export const documentsTable = pgTable(
   "documents",
