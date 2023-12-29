@@ -1,6 +1,6 @@
 // import MapComponent from "./_components/map";
 import { getActivityMembers, getActivityDetial } from "./_components/actions";
-import type { Activity } from "@/lib/types/db";
+import type { Activity_detial } from "@/lib/types/db";
 // import type { NextRequest } from 'next/server';
 import AllPage from "./_components/Allpage";
 
@@ -20,7 +20,7 @@ async function DocPage({params}: Props) {
   // console.log(activityId);
 
   let members: memberType[] = [];
-  let activity: Activity | undefined;
+  let activity: Activity_detial | undefined;
   if(activityId){
     members = await getActivityMembers(activityId);
     activity = await getActivityDetial(activityId);
