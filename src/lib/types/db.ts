@@ -48,3 +48,9 @@ export type Message = {
   content: string;
   time: string;
 }
+
+export type memberType = {
+  displayId: string;
+  username: string;
+  email: string;
+}
