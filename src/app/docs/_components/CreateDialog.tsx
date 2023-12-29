@@ -55,6 +55,7 @@ async function CreateDialog() {
 
             const dateStart = e.get("dateStart")?.toString();
             if (!dateStart) return;
+            console.log(dateStart);
             
             const dateEnd = e.get("dateEnd")?.toString();
             if (!dateEnd) return;
@@ -75,8 +76,24 @@ async function CreateDialog() {
             <div className="w-full flex flex-col gap-2 ">
                 <Input placeholder="Title" name="title" />
                 <Input placeholder="Description" name="description" />
-                <Input placeholder="DateStart" name="dateStart" />
-                <Input placeholder="DateEnd" name="dateEnd" />
+                {/* <Input placeholder="DateStart" name="dateStart" /> */}
+                <p>date start</p>
+                <input
+                type="date"
+                className="bg-transparent outline-none placeholder:text-gray-500"
+                // value={formatDateTime(endDateTime)}
+                // onChange={handleEndDateTimeChange}
+                name="dateStart"
+                />
+                {/* <Input placeholder="DateEnd" name="dateEnd" /> */}
+                <p>date end</p>
+                <input
+                type="date"
+                className="bg-transparent outline-none placeholder:text-gray-500"
+                // value={formatDateTime(endDateTime)}
+                // onChange={handleEndDateTimeChange}
+                name="dateEnd"
+                />
                 <Button type="submit">Add</Button>
             </div>           
         </form>
