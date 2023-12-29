@@ -41,8 +41,7 @@ async function CreateDialog() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Member</DialogTitle>
-          <DialogDescription>Add another member to this trip !</DialogDescription>
+          <DialogTitle>Create a new activity!</DialogTitle>
         </DialogHeader>
         <form
           action={async (e) => {
@@ -74,27 +73,26 @@ async function CreateDialog() {
           className="flex flex-row gap-4"
         >
             <div className="w-full flex flex-col gap-2 ">
+
                 <Input placeholder="Title" name="title" />
+
                 <Input placeholder="Description" name="description" />
-                {/* <Input placeholder="DateStart" name="dateStart" /> */}
-                <p>date start</p>
+
+                <DialogDescription>date start</DialogDescription>
                 <input
-                type="date"
-                className="bg-transparent outline-none placeholder:text-gray-500"
-                // value={formatDateTime(endDateTime)}
-                // onChange={handleEndDateTimeChange}
-                name="dateStart"
+                  type="date"
+                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                  name="dateStart"
                 />
-                {/* <Input placeholder="DateEnd" name="dateEnd" /> */}
-                <p>date end</p>
+
+                <DialogDescription>date end</DialogDescription>
                 <input
-                type="date"
-                className="bg-transparent outline-none placeholder:text-gray-500"
-                // value={formatDateTime(endDateTime)}
-                // onChange={handleEndDateTimeChange}
-                name="dateEnd"
+                  type="date"
+                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                  name="dateEnd"
                 />
                 <Button type="submit">Add</Button>
+
             </div>           
         </form>
       </DialogContent>

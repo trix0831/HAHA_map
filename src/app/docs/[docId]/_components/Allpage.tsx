@@ -72,7 +72,7 @@ function AllPage({activity, members}: inputType) {
 
           <div className="flex flex-col justify-start mt-16 col-span-2">
             <Button 
-              className={` z-50 w-fit bg-green-500 text-white`}
+              className={`fixed right-36 mr-32 top-3 z-50 w-fit`}
               variant="outlined"
               onClick={() => {
                 router.push(`${activityId}/chat`);

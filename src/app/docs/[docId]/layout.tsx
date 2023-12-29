@@ -17,7 +17,7 @@ function DocEditorLayout({ children,params }: Props) {
           <ShareDialog docId={params.docId} />
         </div>
         
-        <div className="col-span-2">{children}</div>
+        <div className="col-span-2 h-full">{children}</div>
     </>
   );
 }

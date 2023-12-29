@@ -13,7 +13,7 @@ function DocsLayout({ children }: Props) {
           <Navbar/>
         </nav>
       {/* overflow-y-scroll for child to show scrollbar */}
-      <div className="w-full overflow-y-auto">{children}</div>
+      <div className="w-full">{children}</div>
     </main>
   );
 }
