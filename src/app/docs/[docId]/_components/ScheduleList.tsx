@@ -17,7 +17,7 @@ function ScheduleList({activity}: ScheduleListProps) {
     {/* absolute right-6 top-24 */}
       <div className="schedule-list-container mt-2 bg-slate-100" style={{ maxHeight: '425px', overflowY: 'scroll', }}>
           {activity && activity.schedule_location.map((act, index) =>
-          (<List>
+          (<List key={index.toString()}>
             <ListItem sx={{ height: '40px' }} className='flex hover:bg-slate-200'>
               <ListItemAvatar>
                 <Avatar>
