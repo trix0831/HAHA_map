@@ -7,3 +7,9 @@ export const editLocationSchema = z.object({
 export const editDescriptionSchema = z.object({
     description: z.string(),
 })
+
+export const editMessageSchema = z.object({
+    messages_content: z.string().array().optional(),
+    messages_senderId: z.string().array().optional(),
+    messages_senderName: z.string().array().optional(),
+})
