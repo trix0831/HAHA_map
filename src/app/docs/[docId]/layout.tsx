@@ -1,4 +1,4 @@
-import ShareDialog from "./_components/ShareDialog";
+// import ShareDialog from "./_components/ShareDialog";
 // import ScheduleList from "./_components/ScheduleList";
 // import { Button } from "@mui/material";
 
@@ -8,7 +8,7 @@ type Props = {
   params: { docId: string };
 };
 
-function DocEditorLayout({ children,params }: Props) {
+function DocEditorLayout({ children }: Props) {
   
 
   return (

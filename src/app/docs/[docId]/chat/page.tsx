@@ -4,6 +4,12 @@ import { useDocument } from "@/hooks/useDocument";
 import ChatRoomInput from "./_components/chatroomInput";
 import ChatRoomMessages from "./_components/chatroommessage";
 import { useRouter, useParams} from "next/navigation";
+// import { useEffect, useState } from "react";
+// import useSchedule from "@/hooks/useSchedule";
+// import { auth } from "@/lib/auth";
+import { useSession } from "next-auth/react";
+import { publicEnv } from "@/lib/env/public";
+// import { Redirect } from "next";
 
 function ChatPage() {
   const router = useRouter();
@@ -11,7 +17,16 @@ function ChatPage() {
   const activityId = Array.isArray(docId) ? docId[0] : docId;
 
   const { content, setContent, senderId, senderName } = useDocument();
+
   
+  const {data:session} = useSession();
+  if (!session?.user?.id){
+    router.push(publicEnv.NEXT_PUBLIC_BASE_URL);
+  }
+  const user = session?.user?.id;
+  const name = session?.user?.username;
+  
+
   return (
     <div className="w-full h-full">
           <nav className="w-full shadow-md p-3 flex justify-items-center">
@@ -31,6 +46,7 @@ function ChatPage() {
 
           <div className="flex flex-col h-full">
               <ChatRoomMessages
+                user={user}
                 content={content}
                 senderId={senderId}
                 senderName={senderName}
@@ -39,6 +55,8 @@ function ChatPage() {
               />
 
               <ChatRoomInput 
+                user={user}
+                name={name}
                 content={content}
                 senderName={senderName}
                 setContent={setContent}

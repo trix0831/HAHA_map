@@ -86,9 +86,13 @@ export const useDocument = () => {
     if (!documentId) return;
     // Private channels are in the format: private-...
     const channelName = `private-${documentId}`;
+    // const channelName = `private-haha`;
 
     try {
       const channel = pusherClient.subscribe(channelName);
+      console.log("count");
+      console.log(channel)
+      
       channel.bind("doc:update", ({ senderId, messages: received_document }: PusherPayload) => {
         if (senderId === userId) {
           return;
