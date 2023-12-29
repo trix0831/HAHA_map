@@ -5,7 +5,7 @@ type Props = {
 
 function ChatroomLayout({children}: Props){
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       {children}
     </div>
   )
