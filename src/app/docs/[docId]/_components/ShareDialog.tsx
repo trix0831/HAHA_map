@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useActivity } from "@/hooks/useActivity";
 import type { memberType } from "@/lib/types/db";
-import { getDocumentAuthors } from "./actions";
+import { useRef } from "react";
 
 type Props = {
   docId: string;
@@ -22,14 +22,26 @@ type Props = {
 
 function ShareDialog({ docId, membersState }: Props) {
 
-  const { setMem, addMem} = useActivity();
-  // console.log("YESMEMBER");
-  // console.log(membersState);
+  const {setMem, addMem} = useActivity();
+  const friendNameRef = useRef<HTMLInputElement>(null);
+
+  async function handleSubmit(){
+    const friendName = friendNameRef.current?.value;
+
+    
+
+    // if(friendName){
+    //   const newMember = await addMem(docId);
+    //   setMem([...membersState, newMember]);
+    // }
+  }
+
+
   return (
     <Dialog>
 
       <DialogTrigger asChild>
-        <Button className="mr-2 bg-white" variant={"outlined"}>Members</Button>
+        <Button className="text-sm" variant={"outlined"}>Members</Button>
       </DialogTrigger>
 
       <DialogContent>
@@ -39,8 +51,7 @@ function ShareDialog({ docId, membersState }: Props) {
           <DialogDescription>Add another member to this trip !</DialogDescription>
         </DialogHeader>
 
-
-        <Input placeholder="Email" name="email" />
+        <Input placeholder="Friend email" name="friendEmail" />
         <Button type="submit">Add</Button>
 
         <div className="flex w-full flex-col gap-1">

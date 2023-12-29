@@ -32,11 +32,11 @@ function ScheduleList({name, location}: ScheduleListProps) {
   }
   return (
     <>
-    {/* absolute right-6 top-24 */}
-      <div className="schedule-list-container mt-2 bg-slate-100" style={{ maxHeight: '425px', overflowY: 'scroll', }}>
-          {location.map((act, index) =>
-          (<List key={index.toString()}>
-            <ListItem sx={{ height: '40px' }} className='flex hover:bg-slate-200'>
+      <div className="schedule-list-container mt-2 bg-slate-100" style={{ height: '453px', overflowY: 'scroll', borderRadius: '12px' }}>
+        <List>
+          {activity && activity.schedule_location.map((act, index) =>
+          (
+            <ListItem sx={{ height: '40px' , borderRadius: '6px'}} className='flex hover:bg-slate-200 mb-4'>
               <ListItemAvatar>
                 <Avatar>
                   <PlaceIcon />
@@ -65,8 +65,9 @@ function ScheduleList({name, location}: ScheduleListProps) {
               </div>
 
             </ListItem>
-          </List>)
+          )
           )}
+          </List>
 
           <style>{`
           ::-webkit-scrollbar {

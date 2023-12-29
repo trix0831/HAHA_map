@@ -15,20 +15,23 @@ type MapProps = {
   location: string;
   setLoca: (location: string) => void;
   saveLoca: (location: string) => Promise<void>;
+  activityId: string;
 };
 
 // const center = {
 //   lat: 23.97555, lng: 120.97361
 // };
 
-function MapComponent({ location, setLoca, saveLoca }: MapProps) {
+function MapComponent({ location, setLoca, saveLoca, activityId }: MapProps) {
   const { isLoaded } = useJsApiLoader({
     id: 'dfb0ed321bfd06d3',
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"
   })
+
   const latlngArr = location.split("-").map(Number);
   const center = {lat: latlngArr[0], lng: latlngArr[1]};
   
+  const [oldLoca, setOldLoca] = React.useState(location);
   // const center = {
   //   lat: location.lat, lng: location.lng
   // }
@@ -36,8 +39,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
 
 
 // eslint-disable-next-line
-  const [map, setMap] = React.useState(null)
-  // console.log(map);
+  const [map, setMap] = React.useState(null);
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -55,46 +57,44 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
 
 
   async function handleClick(){
+    setOldLoca(location);
     await saveLoca(location);
   }
 
   function MarkerFinishDrag(event){
     const coordArray = [event.latLng.lat(), event.latLng.lng()]
-    // console.log(coordArray);
-    // console.log(event.latLng.lat());
-    // console.log(event.latLng.lng());
     setLoca(coordArray.join("-"));
   }
 
-  // function MarkerClicked(event){
-  //   console.log(event);
-  // }
 
   return isLoaded ? (
     <>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={9}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        <MarkerF
-          position={center}
-          draggable={true}
-          onDragEnd={MarkerFinishDrag}
-        />
-      </GoogleMap>
+      <div className='flex flex-col'>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={9}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+        >
+          <MarkerF
+            position={center}
+            draggable={true}
+            onDragEnd={MarkerFinishDrag}
+          />
+        </GoogleMap>
 
-      <Button
-        onClick={() => {
-          handleClick();
-        }}
-        variant="outlined"
-        className='mt-2'
-      >
-        save as default
-      </Button>
+        <Button
+          onClick={() => {
+            handleClick();
+          }}
+          variant="outlined"
+          className={`mt-2 ${(oldLoca !== location) ? "bg-green-500 text-white" : ""}`}
+          disabled={oldLoca === location}
+        >
+          save as main location
+        </Button>
+      </div>
     </>
   ) : <></>
 }
