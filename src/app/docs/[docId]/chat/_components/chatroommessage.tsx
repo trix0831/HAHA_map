@@ -3,9 +3,8 @@
 // import { redirect } from "next/navigation";
 // import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Avatar from "./Avatar";
 import { AiFillDelete } from "react-icons/ai";
-import { start } from "repl";
+import { useRef, useEffect } from "react";
 
 type inputType = {
   content: string[];
@@ -27,6 +26,18 @@ function ChatRoomMessages({content, senderId, senderName, setContent}: inputType
     console.log(temp2);
     setContent(temp1, temp2, temp3);
   }
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [content]);
 
   return (
     <div className="px-2 pt-4 h-5/6" style={{ overflowY: 'scroll', maxHeight: '525px' }}>
@@ -75,6 +86,7 @@ function ChatRoomMessages({content, senderId, senderName, setContent}: inputType
           })
         ):<></>
       }
+      <div ref={messagesEndRef} />
         <style>{`
           ::-webkit-scrollbar {
             width: 0;  /* Remove scrollbar width */

@@ -23,7 +23,7 @@ function ChatPage() {
               }} 
               >
                 <path opacity="0.5" d="M20 12.75 C20.4142 12.75 20.75 12.4142 20.75 12C20.75 11.5858 20.4142 11.25 20 11.25V12.75ZM20 11.25H4V12.75H20V11.25Z" fill="#1C274C"/>
-                <path d="M10 6L4 12L10 18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 6L4 12L10 18" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             
             <p className="text-xl font-semibold ml-2">Chatroom</p>
