@@ -55,7 +55,7 @@ function AllPage({activity, members}: inputType) {
     <>
       <div className="container mx-auto">
         <div className="grid grid-cols-5">
-          <div className="flex flex-col justify-center col-span-3">
+          <div className="flex flex-col align-top col-span-3">
             <div style={{height: "70vh"}} className="w-1/2">
               <p className="text-2xl font-bold py-3">{activity?.title}</p>
               <MapComponent

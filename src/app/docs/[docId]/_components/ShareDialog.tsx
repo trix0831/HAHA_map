@@ -29,7 +29,7 @@ async function ShareDialog({ docId }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="mr-2" variant={"outlined"}>Members</Button>
+        <Button className="mr-2 bg-white" variant={"outlined"}>Members</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
