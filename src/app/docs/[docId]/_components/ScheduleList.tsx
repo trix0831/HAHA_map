@@ -15,7 +15,7 @@ type ScheduleListProps = {
 }
 
 function ScheduleList({name, location}: ScheduleListProps) {
-  const { postSchedule } = useActivity();
+  const { postSchedule, setSchLoca, setSchName} = useActivity();
   const swap = (index: number) => {
     const newScheduleName: string[] = [];
     const newScheduleLocation: string[] = [];
@@ -27,6 +27,8 @@ function ScheduleList({name, location}: ScheduleListProps) {
     newScheduleName[index] = name[index-1];
     newScheduleLocation[index-1] = location[index];
     newScheduleLocation[index] = location[index-1];
+    setSchLoca(newScheduleLocation);
+    setSchName(newScheduleName);
     console.log(name);
     postSchedule(newScheduleName, newScheduleLocation);
   }
@@ -36,7 +38,7 @@ function ScheduleList({name, location}: ScheduleListProps) {
       <List>
         {location.map((act, index) =>
           (
-            <ListItem sx={{ height: '40px', borderRadius : '8px'}} className='flex hover:bg-slate-200 mb-3'>
+            <ListItem key = {index} sx={{ height: '40px', borderRadius : '8px'}} className='flex hover:bg-slate-200 mb-3'>
               <ListItemAvatar>
                 <Avatar>
                   <PlaceIcon />

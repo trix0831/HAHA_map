@@ -15,14 +15,13 @@ type MapProps = {
   location: string;
   setLoca: (location: string) => void;
   saveLoca: (location: string) => Promise<void>;
-  activityId: string;
 };
 
 // const center = {
 //   lat: 23.97555, lng: 120.97361
 // };
 
-function MapComponent({ location, setLoca, saveLoca, activityId }: MapProps) {
+function MapComponent({ location, setLoca, saveLoca }: MapProps) {
   const { isLoaded } = useJsApiLoader({
     id: 'dfb0ed321bfd06d3',
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"

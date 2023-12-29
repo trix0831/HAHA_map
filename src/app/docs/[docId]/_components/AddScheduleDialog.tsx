@@ -38,14 +38,15 @@ function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schNam
 
     let b:string[] = [];
 
-    if(name !== undefined){
-        await setName((prev:string[]) => [...prev, nameStr]);
+    if(name !== undefined && location !== undefined){
+        setName((prev:string[]) => [...prev, nameStr]);
+        setSchLoca([...schLoca, location])
         b = [...schName, nameStr];
     }
 
-    if(location !== undefined){
-        await setSchLoca([...schLoca, location])
-    }
+    // if(location !== undefined){
+        
+    // }
 
     const a = [...schLoca, location];
 

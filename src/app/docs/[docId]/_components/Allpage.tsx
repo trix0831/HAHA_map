@@ -70,7 +70,6 @@ function AllPage({activity, members}: inputType) {
                 location={location}
                 setLoca={setLoca}
                 saveLoca={updateLocation}
-                activityId={activityId}
               />
             </div>
           </div>
