@@ -61,45 +61,52 @@ function AllPage({activity, members}: inputType) {
 
   return (
     <>
-      <div className="container mx-auto">
-        <div className="grid grid-cols-5">
-          <div className="flex flex-col align-top col-span-3">
+      <div className="container ml-3 mr-3">
+        <div className="grid grid-cols-7">
+          <div className="flex flex-col align-top col-span-4">
             <div style={{height: "70vh"}} className="w-1/2">
               <p className="text-2xl font-bold py-3">{activity?.title}</p>
               <MapComponent
                 location={location}
                 setLoca={setLoca}
                 saveLoca={updateLocation}
+                activityId={activityId}
               />
             </div>
           </div>
 
-          <div className="flex flex-col justify-start mt-16 col-span-2">
-            <Button 
-              className={`fixed right-36 mr-32 top-3 z-50 w-fit`}
-              variant="outlined"
-              onClick={() => {
-                router.push(`${activityId}/chat`);
-              }} 
-            >
-                chatroom
-            </Button>
-            
-            <Button 
-              className={`fixed right-20 mr-14 top-3 z-50 w-fit  ${participateState === 'participate' ? 'bg-white' : 'bg-green-500 text-white'}`}
-              variant="outlined"
-              onClick={toggleParticipate} 
-              >
-                {participateState}
-            </Button>
-
-            <ShareDialog 
-            membersState={membersState}
-            docId={activityId} 
-          />
+          <div className="mt-4 col-span-3 mb-2">
 
             <div className="flex justify-between">
-              <p className="ml-5 font-semibold text-xl">Schedule</p>
+              <Button 
+                className="text-sm mr-1"
+                variant="outlined"
+                onClick={() => {
+                  router.push(`${activityId}/chat`);
+                }} 
+              >
+                  chatroom
+              </Button>
+
+              <Button 
+                className={`text-sm mr-1 ${participateState === 'participate' ? 'bg-white' : 'bg-green-500 text-white'}`}
+                variant="outlined"
+                onClick={toggleParticipate} 
+                >
+                  {participateState}
+              </Button>
+
+              <ShareDialog 
+                membersState={membersState}
+                docId={activityId} 
+              />
+            </div>
+
+            <div className="flex justify-between mt-5">
+              <p className="ml-5 font-semibold text-xl">
+                Schedule
+              </p>
+
               <AddScheduleDialog 
                 setName={setSchName}
                 setSchLoca={setSchLoca}
