@@ -46,7 +46,7 @@ function ChatPage() {
 
           <div className="flex flex-col h-full">
               <ChatRoomMessages
-                user={user}
+                user={user!}
                 content={content}
                 senderId={senderId}
                 senderName={senderName}
@@ -55,8 +55,8 @@ function ChatPage() {
               />
 
               <ChatRoomInput 
-                user={user}
-                name={name}
+                user={user!}
+                name={name!}
                 content={content}
                 senderName={senderName}
                 setContent={setContent}
