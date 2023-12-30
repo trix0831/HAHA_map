@@ -172,6 +172,7 @@ function AllPage({activity, members}: inputType) {
             </div>
             
             <ScheduleList 
+              setLoca = {setLoca}
               name = {scheduleName}
               location = {scheduleLocation}
             />
