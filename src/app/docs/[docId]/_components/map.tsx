@@ -72,7 +72,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={9}
+          zoom={7}
           onLoad={onLoad}
           onUnmount={onUnmount}
         >

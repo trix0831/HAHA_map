@@ -43,9 +43,12 @@ function ScheduleList({setLoca, name, location}: ScheduleListProps) {
       <List>
         {location.map((act, index) =>
           (
-            <ListItem key = {index} sx={{ height: '40px', borderRadius : '8px'}} className='flex hover:bg-slate-200 mb-3' onClick={() => {setMarkerLocation(index)}}>
+            <ListItem key = {index} sx={{ height: '40px', borderRadius : '8px'}} className='flex mb-3'>
               <ListItemAvatar>
-                <Avatar>
+                <Avatar
+                  className='hover:bg-slate-300 rounded-xl'
+                  onClick={() => {setMarkerLocation(index)}}
+                >
                   <PlaceIcon />
                 </Avatar>
               </ListItemAvatar>
@@ -57,19 +60,29 @@ function ScheduleList({setLoca, name, location}: ScheduleListProps) {
                 .join('-')}  sx={{ whiteSpace: 'nowrap' }}
               />
 
-              <div className='hover:bg-slate-300 mr-1' onClick={() => {swap(index)}}>
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.5L12 7" stroke="#363853" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M8 11.0883L12 6.50002L16 11.0883" stroke="#0095FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <div className='hover:bg-slate-300 rounded-2xl mr-1' onClick={() => {swap(index)}}>
+                <svg fill="#88c7f7" height="24" width="24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xmlSpace="preserve">
+                  <g>
+                    <path d="M24.4,24c-0.9,0-1.8-0.3-2.5-1l-5.8-5.7c-0.1-0.1-0.2-0.1-0.3,0L10.1,23c-1.4,1.4-3.6,1.4-5,0c-0.7-0.7-1-1.6-1-2.5
+                    c0-1,0.4-1.8,1-2.5l9.4-9.3c0.9-0.9,2.3-0.9,3.1,0l9.4,9.3c0.7,0.7,1,1.6,1,2.5c0,1-0.4,1.8-1,2.5C26.2,23.7,25.3,24,24.4,24z" />
+                  </g>
                 </svg>
               </div>
 
-              <div className='hover:bg-slate-300' onClick={() => {swap(index+1)}}>
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 6.5L12 17" stroke="#363853" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M16 12.9117L12 17.5L8 12.9117" stroke="#0095FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <div className='hover:bg-slate-300 rounded-2xl mr-1' onClick={() => {swap(index+1)}}>
+                <svg fill="#88c7f7" height="24" width="24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xmlSpace="preserve">
+                  <g>
+                    <path d="M16,25c-0.6,0-1.1-0.2-1.6-0.6l-9.4-9.3c-0.7-0.7-1-1.6-1-2.5c0-1,0.4-1.8,1-2.5c1.4-1.4,3.6-1.4,5,0l5.8,5.7
+                    c0.1,0.1,0.2,0.1,0.3,0l5.8-5.7c1.4-1.4,3.6-1.4,5,0c0.7,0.7,1,1.6,1,2.5c0,1-0.4,1.8-1,2.5l-9.4,9.3C17.1,24.8,16.6,25,16,25z" />
+                  </g>
                 </svg>
               </div>
+
+            <div className='hover:bg-slate-300 rounded-2xl mr-1'>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9L13.0001 11.9999M13.0001 11.9999L10 15M13.0001 11.9999L10.0002 9M13.0001 11.9999L16.0002 15M8 6H19C19.5523 6 20 6.44772 20 7V17C20 17.5523 19.5523 18 19 18H8L2 12L8 6Z" stroke="#828582" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
 
             </ListItem>
           )
