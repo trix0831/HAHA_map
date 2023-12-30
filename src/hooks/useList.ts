@@ -9,12 +9,28 @@ export const useList = () => {
   const [allActivity, setAllactivity] = useState<activityType[]>([]);
   const [myActivity, setMyActivity] = useState<activityType[]>([]);
 
+
   const setAll = (all: activityType[]) => {
     setAllactivity(all);
   }
 
   const setMy = (my: activityType[]) => {
     setMyActivity(my);
+  }
+
+  const deleteActivity = async(activityId: string) => {
+    const res = await fetch(`/api/activities/${activityId}`,{
+      method: "DELETE",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        activityId: activityId,
+      })
+    });
+    if (!res.ok){
+      return;
+    }
   }
 
   const addMembers = async (userId: string, activityId: string) => {
@@ -43,6 +59,7 @@ export const useList = () => {
   return{
     allActivity,
     myActivity,
+    deleteActivity,
     setAll,
     setMy,
     addMembers,
