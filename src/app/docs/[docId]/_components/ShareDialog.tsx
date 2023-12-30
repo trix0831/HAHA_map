@@ -12,7 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { useActivity } from "@/hooks/useActivity";
 import type { memberType } from "@/lib/types/db";
-// import { useRef } from "react";
+import { useRef } from "react";
+// import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   docId: string;
@@ -21,20 +23,24 @@ type Props = {
 
 
 function ShareDialog({ membersState }: Props) {
+  const router = useRouter();
+  const {addMem} = useActivity();
+  const friendNameRef = useRef<HTMLInputElement>(null);
 
-  // const {setMem, addMem} = useActivity();
-  // const friendNameRef = useRef<HTMLInputElement>(null);
+  const handleSubmit = async() => {
+    const friendEmail = friendNameRef.current?.value;
 
-  // async function handleSubmit(){
-  //   const friendName = friendNameRef.current?.value;
-
-    
-
-  //   // if(friendName){
-  //   //   const newMember = await addMem(docId);
-  //   //   setMem([...membersState, newMember]);
-  //   // }
-  // }
+    if(friendEmail){
+      // setMem()
+      const newMember = await addMem(friendEmail);
+      if(newMember){
+        alert("successfully added");
+      }else{
+        alert("user not found");
+      }
+      router.refresh();
+    }
+  }
 
 
   return (
@@ -51,8 +57,8 @@ function ShareDialog({ membersState }: Props) {
           <DialogDescription>Add another member to this trip !</DialogDescription>
         </DialogHeader>
 
-        <Input placeholder="Friend email" name="friendEmail" />
-        <Button type="submit">Add</Button>
+        <Input placeholder="Friend email" name="friendEmail" ref={friendNameRef} />
+        <Button type="submit" onClick= {handleSubmit}>Add</Button>
 
         <div className="flex w-full flex-col gap-1">
           <h1 className="w-full font-semibold text-slate-900">Members</h1>

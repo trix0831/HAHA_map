@@ -39,8 +39,8 @@ function AllPage({activity, members}: inputType) {
       setSchName(activity.schedule_name);
     }
     setMem(members);
-    // console.log("MEMBER!!!")
-    // console.log(members);
+    console.log("MEMBER!!!")
+    console.log(members);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity, members]);

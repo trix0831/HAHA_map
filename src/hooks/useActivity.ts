@@ -15,7 +15,7 @@ export const useActivity = () => {
   const router = useRouter();
   const [description, setDescription] = useState<string>("a");
   const [location, setLocation] = useState<string>("");
-  const [membersState, setMembers] = useState<memberType[]>([]);
+  const [membersState, setMembersState] = useState<memberType[]>([]);
   const [dateStart, setDateStart] = useState<string>("");
   const [dateEnd, setDateEnd] = useState<string>("");
   const [scheduleName, setScheduleName] = useState<string[]>([]);
@@ -76,13 +76,14 @@ export const useActivity = () => {
     router.refresh();
   };
 
-  const editMembers =async (userId: string) => {
+  const editMembers =async ({userEmail, userId}:{userEmail?: string, userId?: string}) => {
     const res = await fetch(`/api/members`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        userEmail: userEmail,
         userId: userId,
         activityId: activityId,
       }),
@@ -90,12 +91,13 @@ export const useActivity = () => {
     if(!res.ok){
       console.log("can't add member to activity");
       return;
-    }
-
-    const result = await fetch(`/api/activities/${activityId}?type=members`);
-    if(result.ok){
-      const data: memberType[] = await result.json();
-      setMembers(data);
+    }else{
+      const data = await res.json();
+      if(data.message === true){
+        return true;
+      }else if(data.message === false){
+        return false;
+      }
     }
   }
 
@@ -112,12 +114,13 @@ export const useActivity = () => {
     setLocation(lo);
   }
 
-  const addMem = async (userId: string) => {
-    await editMembers(userId);
+  const addMem = async (userEmail: string) => {
+    const ans = await editMembers({userEmail});
+    return ans;
   }
 
   const setMem = (mem: memberType[]) => {
-    setMembers(mem);
+    setMembersState(mem);
   }
 
   const setDateS = async (s: string) => {
