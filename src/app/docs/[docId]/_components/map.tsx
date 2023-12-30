@@ -88,7 +88,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
             handleClick();
           }}
           variant="outlined"
-          className={`mt-2 ${(oldLoca !== location) ? "bg-green-500 text-white" : ""}`}
+          className={`mt-2 ${(oldLoca !== location) ? "bg-#88c7f7" : ""}`}
           disabled={oldLoca === location}
         >
           save as main location

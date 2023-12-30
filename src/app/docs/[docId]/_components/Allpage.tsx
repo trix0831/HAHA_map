@@ -102,7 +102,11 @@ function AllPage({activity, members}: inputType) {
               {/* Chatroom */}
               <svg width="36" height="36" 
                 onClick={() => {
-                  router.push(`${activityId}/chat`);
+                  if(participateState){
+                    router.push(`${activityId}/chat`);
+                  }else{
+                    alert("Please first participate the activity !!");
+                  }
                 }}
                 className="hover:bg-slate-300 rounded-2xl"
                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,6 +128,7 @@ function AllPage({activity, members}: inputType) {
               <ShareDialog 
                 membersState={membersState}
                 docId={activityId} 
+                participateState={participateState}
               />
 
               <DescriptionDialog
@@ -134,14 +139,14 @@ function AllPage({activity, members}: inputType) {
             </div>
 
             <div className="flex justify-center mt-5 bg-slate-200 rounded-lg">
-              <div className="mr-2">
+              <div className="mr-5">
                 <p className="font-semibold text-md">
                   Start Date：
                 </p>
                 <p className="font-normal text-md text-slate-500">{dateStart}</p>
               </div>
               
-              <div className="ml-2">
+              <div className="ml-8">
                 <p className="font-semibold text-md">
                   End Date：
                 </p>
@@ -161,6 +166,7 @@ function AllPage({activity, members}: inputType) {
                 save={postSchedule}
                 schLoca={scheduleLocation}
                 schName = {scheduleName}
+                participateState = {participateState}
               />
             </div>
             
@@ -168,6 +174,7 @@ function AllPage({activity, members}: inputType) {
               setLoca = {setLoca}
               name = {scheduleName}
               location = {scheduleLocation}
+              participateState = {participateState}
             />
           </div>
         </div>
