@@ -1,9 +1,4 @@
 {
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
-  },
   "name": "112-1-unit2-notion-clone",
   "version": "0.1.0",
   "private": true,
