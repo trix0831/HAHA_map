@@ -37,6 +37,22 @@ function ScheduleList({setLoca, name, location}: ScheduleListProps) {
     console.log(name);
     postSchedule(newScheduleName, newScheduleLocation);
   }
+  const delete = (index: number) => {
+    const newScheduleName: string[] = [];
+    const newScheduleLocation: string[] = [];
+    for(let i = 0; i < index; i++){
+      newScheduleName[i] = name[i];
+      newScheduleLocation[i] = location[i];
+    }
+    for(let i = index+1; i < name.length; i++){
+      newScheduleName[i-1] = name[i];
+      newScheduleLocation[i-1] = location[i];
+    }
+    setSchLoca(newScheduleLocation);
+    setSchName(newScheduleName);
+    console.log(name);
+    postSchedule(newScheduleName, newScheduleLocation);
+  }
   return (
     <>
       <div className="schedule-list-container bg-slate-100 h-full" style={{  overflowY: 'scroll', borderRadius: '12px'}}>
