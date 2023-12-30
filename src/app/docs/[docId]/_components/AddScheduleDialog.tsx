@@ -16,9 +16,10 @@ type Props = {
     save: (name:string[], location:string[]) => Promise<void>;
     schLoca: string[];
     schName: string[];
+    participateState: boolean;
 };
 
-function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schName}:Props) {
+function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schName, participateState}:Props) {
   const [open, setOpen] = useState(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const [textFieldValue, setTextFieldValue] = useState('');
@@ -63,7 +64,14 @@ function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schNam
 
   return (
     <React.Fragment>
-      <Button variant="outlined" className='text-sm mb-1 flex items-center justify-between' onClick={handleClickOpen}>
+      <Button variant="outlined" className='text-sm mb-1 flex items-center justify-between' onClick={() => {
+          if(participateState){
+            handleClickOpen();
+          }else{
+            alert("Please first participate the activity !!");
+          }
+        }
+        }>
         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path
             d="M14,16l1,5,6-6ZM20,4H4A1,1,0,0,0,3,5V20a1,1,0,0,0,1,1H15l6-6V5A1,1,0,0,0,20,4Z"
