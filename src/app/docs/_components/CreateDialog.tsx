@@ -71,7 +71,6 @@ async function CreateDialog() {
 
             const createData={title:title, description:description, dateStart:dateStart, dateEnd:dateEnd, organizerId:userId}
 
-
             const result = await createActivity(createData);
             if(!result){
               console.log("can't create");
