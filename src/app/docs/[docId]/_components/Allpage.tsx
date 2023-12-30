@@ -3,7 +3,6 @@ import MapComponent from "./map";
 import type { Activity_detial } from "@/lib/types/db";
 import { useEffect } from "react";
 import { useActivity } from "@/hooks/useActivity";
-import { Button } from "@mui/material";
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import ScheduleList from "./ScheduleList";

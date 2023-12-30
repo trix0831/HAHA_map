@@ -8,7 +8,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useRouter } from "next/navigation";
 import { useActivity } from '@/hooks/useActivity';
-import { useRef } from 'react';
 
 import type { memberType } from "@/lib/types/db";
 
@@ -21,7 +20,6 @@ export function ShareDialog({ membersState }: Props) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
   const {addMem} = useActivity();
-  const friendEmailRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = React.useState('');
 
   const handleClickOpen = () => {
