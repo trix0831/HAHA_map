@@ -27,7 +27,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
     googleMapsApiKey: "AIzaSyAQmlApIesOpt3qQJ6FvX4HqvTtbp8QH3k"
   })
 
-  const latlngArr = location.split("-").map(Number);
+  const latlngArr = location.split("/").map(Number);
   const center = {lat: latlngArr[0], lng: latlngArr[1]};
   
   const [oldLoca, setOldLoca] = React.useState(location);
@@ -62,7 +62,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
 
   function MarkerFinishDrag(event){
     const coordArray = [event.latLng.lat(), event.latLng.lng()]
-    setLoca(coordArray.join("-"));
+    setLoca(coordArray.join("/"));
   }
 
 

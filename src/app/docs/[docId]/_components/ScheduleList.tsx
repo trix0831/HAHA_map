@@ -70,9 +70,9 @@ function ScheduleList({setLoca, name, location, participateState}: ScheduleListP
 
               <ListItemText primary={name[index]} secondary={
                 act
-                .split('-') // Split the string at "-"
+                .split('/') // Split the string at "-"
                 .map((part) => part.trim().slice(0, 6)) // Extract the first 5 words from each part
-                .join('-')}  sx={{ whiteSpace: 'nowrap' }}
+                .join('/')}  sx={{ whiteSpace: 'nowrap' }}
               />
 
               <div className='hover:bg-slate-300 rounded-2xl mr-1' onClick={() => {
