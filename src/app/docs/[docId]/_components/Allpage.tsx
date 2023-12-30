@@ -25,7 +25,7 @@ function AllPage({activity, members}: inputType) {
   const { docId } = useParams();
   const activityId = Array.isArray(docId) ? docId[0] : docId;
   const router = useRouter();
-  const {membersState, updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName} = useActivity();
+  const {membersState, updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName, dateStart, dateEnd} = useActivity();
   useEffect(() => {
     console.log("useEffect");
     console.log(activity);
@@ -76,7 +76,7 @@ function AllPage({activity, members}: inputType) {
 
           <div className="mt-4 col-span-3 mb-2">
 
-            <div className="flex justify-between">
+            <div className="flex justify-between bg-slate-300">
               <Button 
                 className="text-sm mr-1"
                 variant="outlined"
@@ -88,7 +88,7 @@ function AllPage({activity, members}: inputType) {
               </Button>
 
               <Button 
-                className={`text-sm mr-1 ${participateState === 'participate' ? 'bg-white' : 'bg-green-500 text-white'}`}
+                className={`text-sm mr-1 ${participateState === 'participate' ? '' : 'bg-green-500 text-white'}`}
                 variant="outlined"
                 onClick={toggleParticipate} 
                 >
@@ -101,7 +101,23 @@ function AllPage({activity, members}: inputType) {
               />
             </div>
 
-            <div className="flex justify-between mt-5">
+            <div className="flex justify-center mt-5 bg-slate-300 rounded-lg">
+              <div className="mr-2">
+                <p className="font-semibold text-md">
+                  Start Date：
+                </p>
+                <p className="font-normal text-md text-slate-500">{dateStart}</p>
+              </div>
+              
+              <div className="ml-2">
+                <p className="font-semibold text-md">
+                  End Date：
+                </p>
+                <p className="font-normal text-md text-slate-500">{dateEnd}</p>
+              </div>
+            </div>
+
+            <div className="flex justify-between mt-6">
               <p className="ml-5 font-semibold text-xl">
                 Schedule
               </p>

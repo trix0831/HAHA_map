@@ -63,8 +63,27 @@ function AddScheduleDialog({setName, setSchLoca, location, save, schLoca, schNam
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add Schedule
+      <Button variant="outlined" className='text-sm mb-1 flex items-center justify-between' onClick={handleClickOpen}>
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M14,16l1,5,6-6ZM20,4H4A1,1,0,0,0,3,5V20a1,1,0,0,0,1,1H15l6-6V5A1,1,0,0,0,20,4Z"
+            fill="none"
+            stroke="#000000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M20,4H4A1,1,0,0,0,3,5V9H21V5A1,1,0,0,0,20,4ZM17,3V5M12,3V5M7,3V5"
+            fill="none"
+            stroke="#2CA9BC"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+        </svg>
+        
+        <p className='ml-1'>Add Schedule</p>
       </Button>
       <Dialog open={open} onClose={handleCancel}>
         <DialogTitle>Add Schedule</DialogTitle>
