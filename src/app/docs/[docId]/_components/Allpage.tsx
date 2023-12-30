@@ -139,14 +139,14 @@ function AllPage({activity, members}: inputType) {
             </div>
 
             <div className="flex justify-center mt-5 bg-slate-200 rounded-lg">
-              <div className="mr-2">
+              <div className="mr-5">
                 <p className="font-semibold text-md">
                   Start Date：
                 </p>
                 <p className="font-normal text-md text-slate-500">{dateStart}</p>
               </div>
               
-              <div className="ml-2">
+              <div className="ml-8">
                 <p className="font-semibold text-md">
                   End Date：
                 </p>
