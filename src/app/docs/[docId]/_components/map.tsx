@@ -75,6 +75,7 @@ function MapComponent({ location, setLoca, saveLoca }: MapProps) {
           zoom={7}
           onLoad={onLoad}
           onUnmount={onUnmount}
+          mapContainerClassName='rounded-xl'
         >
           <MarkerF
             position={center}
