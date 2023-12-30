@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-// import { useActivity } from "@/hooks/useActivity";
+import { useActivity } from "@/hooks/useActivity";
 import type { memberType } from "@/lib/types/db";
 // import { useRef } from "react";
 
