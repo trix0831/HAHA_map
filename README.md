@@ -56,8 +56,17 @@
 8. Open http://localhost:3000 in your browser<br/>
 
 # Collaboration
+```
 <li>B11901158 徐立承<br/>
-UI Frontend design and implementation. Dealing with almost all tailwindcss properties and arrangement. Connect UI with the function provided by my teammates.
+1. UI Frontend design and implementation. 
+2. Dealing with almost all tailwindcss properties and arrangement. 3. Connect UI with the function provided by my teammates.
 <li>B11901145 吳宥瑄<br/>
+1. Design the structure of schema and backend type format. 
+2. Implement the table editing, and HTTPS request in api and hooks.
+3. Implement pusher to send messages. 
 <li>B11901028 張沖和<br/>
+1. Implement the table editing, and HTTPS request in api and hooks.
+2. Connect the frontend and backend, put the UI interface to effect.
+3. Implement pusher to send messages.
+```
 
