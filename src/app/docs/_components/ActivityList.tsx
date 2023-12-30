@@ -20,7 +20,7 @@ type ActivityListProps = {
   
 export function ActivityList({allActivities, myActivities, activityID} : ActivityListProps){
   
-  const {setAll, setMy, allActivity} = useList();
+  const {setAll, setMy, allActivity, deleteActivity} = useList();
   useEffect(() => {
     setAll(allActivities);
     setMy(myActivities);
@@ -130,7 +130,7 @@ export function ActivityList({allActivities, myActivities, activityID} : Activit
                       </div>
                     </Link>
 
-                    <div className="hidden mr-5 text-slate-400 hover:text-red-400 group-hover:flex">
+                    <div className="hidden mr-5 text-slate-400 hover:text-red-400 group-hover:flex" onClick= {()=>deleteActivity(doc.displayId)}>
                       <AiFillDelete size={20}/>
                     </div>
 

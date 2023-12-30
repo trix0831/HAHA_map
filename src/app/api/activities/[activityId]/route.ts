@@ -132,6 +132,20 @@ export async function POST(request: NextRequest) {
 }
 
 
+
+export async function DELETE(
+  request: NextRequest,
+  {params}:{params:{activityId:string}},
+){
+  try{
+    await db.delete(activitiesTable).where(
+      eq(activitiesTable.displayId, params.activityId),
+    );
+    return NextResponse.json({ message: true}, {status:200});
+  }catch (error){
+    return NextResponse.json({error: "Failed to delete activity"}, {status:500});
+  }
+}
 // Define the schema for the activity update request
 const updateActivityRequestSchema = z.object({
   // title: z.string().min(1).max(30).optional(),
