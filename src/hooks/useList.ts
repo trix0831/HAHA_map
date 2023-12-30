@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { publicEnv } from "@/lib/env/public";
 
 type activityType = {
   displayId: string;
@@ -9,7 +11,7 @@ export const useList = () => {
   const [allActivity, setAllactivity] = useState<activityType[]>([]);
   const [myActivity, setMyActivity] = useState<activityType[]>([]);
 
-
+  const router = useRouter();
   const setAll = (all: activityType[]) => {
     setAllactivity(all);
   }
@@ -19,6 +21,7 @@ export const useList = () => {
   }
 
   const deleteActivity = async(activityId: string) => {
+    // alert("deleting");
     const res = await fetch(`/api/activities/${activityId}`,{
       method: "DELETE",
       headers:{
@@ -31,6 +34,8 @@ export const useList = () => {
     if (!res.ok){
       return;
     }
+    router.push(`${publicEnv.NEXT_PUBLIC_BASE_URL}/docs`);
+    router.refresh();
   }
 
   const addMembers = async (userId: string, activityId: string) => {
