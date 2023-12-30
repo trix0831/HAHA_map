@@ -54,7 +54,7 @@ function ScheduleList({setLoca, name, location, participateState}: ScheduleListP
   
   return (
     <>
-      <div className="schedule-list-container bg-slate-100 h-full" style={{  overflowY: 'scroll', borderRadius: '12px'}}>
+      <div className="schedule-list-container bg-slate-100 h-9/12" style={{  overflowY: 'scroll', borderRadius: '12px', height : '400px'}}>
       <List>
         {location.map((act, index) =>
           (
