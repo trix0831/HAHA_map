@@ -8,6 +8,8 @@ import { useRouter, useParams } from "next/navigation";
 import ScheduleList from "./ScheduleList";
 import AddScheduleDialog from "./AddScheduleDialog";
 import ShareDialog from "./ShareDialog";
+import { useSession } from "next-auth/react";
+import { publicEnv } from "@/lib/env/public";
 
 type memberType = {
   displayId: string;
@@ -21,10 +23,12 @@ type inputType = {
 }
 
 function AllPage({activity, members}: inputType) {
+  const {data: session} = useSession();
   const { docId } = useParams();
   const activityId = Array.isArray(docId) ? docId[0] : docId;
   const router = useRouter();
-  const {membersState, updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName, dateStart, dateEnd} = useActivity();
+  const {membersState, updateLocation,postSchedule,location, setDes, setLoca, setDateE, setDateS, setMem, setSchLoca, setSchName, scheduleLocation, scheduleName, dateStart, dateEnd, addMemId, deleteMemId} = useActivity();
+  const [participateState, setParticipateState] = useState<boolean>(false);
   useEffect(() => {
     console.log("useEffect");
     console.log(activity);
@@ -40,17 +44,35 @@ function AllPage({activity, members}: inputType) {
     setMem(members);
     console.log("MEMBER!!!")
     console.log(members);
-
+    let temp:boolean = false;
+    for(let i = 0; i < members.length; i++){
+      if(members[i].displayId === session?.user?.id){
+        temp = true;
+      }
+    }
+    setParticipateState(temp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity, members]);
-
-  
-  const [participateState, setParticipateState] = useState(false);
 
   console.log("allPageMember");
   console.log(membersState);
   const toggleParticipate = () => {
-    setParticipateState(!participateState);
+    if(participateState === false){
+      if(!session?.user?.id){
+        router.push(publicEnv.NEXT_PUBLIC_BASE_URL);
+      }else{
+        addMemId(session?.user?.id);
+        setParticipateState(true);
+      }
+    }else{
+      if(!session?.user?.id){
+        router.push(publicEnv.NEXT_PUBLIC_BASE_URL);
+      }else{
+        deleteMemId(session?.user?.id);
+        setParticipateState(false);
+      }
+    }
+    router.refresh();
   };
   console.log("Location");
   console.log(location);

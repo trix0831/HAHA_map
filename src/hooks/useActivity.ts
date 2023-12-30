@@ -101,6 +101,24 @@ export const useActivity = () => {
     }
   }
 
+  const deleteMembers = async (userId: string) => {
+    const res = await fetch(`/api/members`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        activityId: activityId,
+      }),
+    });
+    if(!res.ok){
+      console.log("can't delete member to activity");
+      return;
+    }
+  }
+
+
   const setDes = async (des: string) => {
     setDescription(des);
     // await editActivity();
@@ -117,6 +135,15 @@ export const useActivity = () => {
   const addMem = async (userEmail: string) => {
     const ans = await editMembers({userEmail});
     return ans;
+  }
+
+  const addMemId= async (userId: string) => {
+    const ans = await editMembers({userId});
+    return ans;
+  }
+
+  const deleteMemId= async (userId: string) => {
+    deleteMembers(userId);
   }
 
   const setMem = (mem: memberType[]) => {
@@ -150,6 +177,8 @@ return{
   save,
   setMem,
   addMem,
+  addMemId,
+  deleteMemId,
   setDateS, 
   setDateE,
   setSchName,
